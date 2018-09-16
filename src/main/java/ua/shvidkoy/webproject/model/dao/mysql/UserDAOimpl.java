@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -33,14 +35,14 @@ public class UserDAOimpl implements UserDAO {
 	public static final String USER_ROLE_ID = "id_role";
 	public static final String USER_PHOTO_ID = "id_photo";
 	// SQL queries
-	private static final String SQL_REMOVE_ADMIN = "DELETE FROM users WHERE user_id=?";
+	private static final String SQL_REMOVE_ADMIN = "DELETE FROM user WHERE user_id=?";
 	private static final String SQL_FIND_ADMINS = "SELECT * FROM users WHERE user_type_id=1";
-	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id=?";
-	private static final String SQL_INSERT_USER_FULL_INFO = "INSERT INTO users VALUES (DEFAULT,?, ?, ?, ?, ?, ?)";
-	private static final String SQL_INSERT_USER_SHORT_VARIANT = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, DEFAULT, DEFAULT)";
-	private static final String SQL_UPDATE_USER = "UPDATE users SET name = ?, surname = ?, email = ?, email_verification = ?, "
-			+ "password=?, user_type_id = ?, user_status_id = ? WHERE user_id=?";
-	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login=?";
+	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM user WHERE id_role=1 or id_role = 2";
+	private static final String SQL_INSERT_USER_FULL_INFO = "INSERT INTO user VALUES (DEFAULT,?, ?, ?, ?, ?, ?)";
+	private static final String SQL_INSERT_USER_SHORT_VARIANT = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, DEFAULT, DEFAULT)";
+	private static final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?, last_name = ?, login = ?, "
+			+ "password=?, id_role = ?, id_photo = ? WHERE user_id=?";
+	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
 
 	@Override
 	public User selectEntityById(int id) throws MySqlException, ConnectionException {
@@ -185,6 +187,45 @@ public class UserDAOimpl implements UserDAO {
 			factory.close(con, pstmt, rs);
 		}
 		return user;
+	}
+
+	@Override
+	public boolean isExist(String login) throws MySqlException, ConnectionException {
+
+		try (ProxyConnection connection = ConnectionPool.getInstance().getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN)) {
+			preparedStatement.setString(1, login);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			return resultSet.next();
+
+		} catch (SQLException e) {
+			throw new MySqlException("SQL exception (query or table failed)", e);
+		}
+	}
+
+	@Override
+	public List<User> findAll() throws MySqlException, ConnectionException {
+
+		List<User> result = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rs = null;
+		ProxyConnection con = null;
+		try {
+			con = factory.getProxyConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(SQL_FIND_ADMINS);
+			while (rs.next()) {
+				result.add(extractUser(rs));
+			}
+			con.commit();
+		} catch (SQLException ex) {
+			factory.rollback(con);
+			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_ADMINS, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_ADMINS, ex);
+		} finally {
+			factory.close(con, stmt, rs);
+		}
+		return result;
 	}
 
 }

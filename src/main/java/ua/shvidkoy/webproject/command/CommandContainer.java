@@ -6,6 +6,9 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
+import ua.shvidkoy.webproject.command.guest.LoginCommand;
+import ua.shvidkoy.webproject.logic.GuestLogic;
+
 
 public class CommandContainer {
 	
@@ -15,7 +18,7 @@ public class CommandContainer {
 	
 	static {
 		// common commands
-		//commands.put("login", new LoginCommand());
+		commands.put("login", new LoginCommand(new GuestLogic()));
 		//commands.put("logout", new LogoutCommand());
 		//commands.put("commandNotFound", new NoCommand());
 		
@@ -27,7 +30,6 @@ public class CommandContainer {
 		//commands.put("delete_user", new DeleteUserCommand());
 		
 		// admin commands
-		//commands.put("listRequests", new ListRequestsCommand());
 		//commands.put("actionsPage", new ActionsPageCommand());
 		//commands.put("adminAction", new AdminActionCommand());
 		//commands.put("showActionConfirmed", new ShowActionConfirmedCommand());

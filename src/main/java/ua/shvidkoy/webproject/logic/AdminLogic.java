@@ -1,16 +1,20 @@
 package ua.shvidkoy.webproject.logic;
 
 import ua.shvidkoy.webproject.exception.ConnectionException;
+import ua.shvidkoy.webproject.exception.LogicException;
 import ua.shvidkoy.webproject.exception.MySqlException;
-import ua.shvidkoy.webproject.model.connectionpool.utill.TransactionManager;
-import ua.shvidkoy.webproject.model.dao.AbstractDAOFactory;
-import ua.shvidkoy.webproject.model.dao.UserDAO;
-import ua.shvidkoy.webproject.model.dao.AbstractDAOFactory.FactoryTypes;
-import ua.shvidkoy.webproject.model.entity.User;
 
-public class AdminLogic {
+public class AdminLogic extends ApplicationLogic{
 
-	private static AbstractDAOFactory mysqlFactory = AbstractDAOFactory.getDAOFactory(FactoryTypes.MYSQL);
-	private static UserDAO userDao = mysqlFactory.getUserDAO();
+	
 
+	public boolean isLoginFree(String login) throws LogicException, ConnectionException {
+
+		try {
+
+			return !userDao.isExist(login);
+		} catch (MySqlException e) {
+			throw new LogicException(e);
+		}
+	}
 }

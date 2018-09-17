@@ -12,7 +12,7 @@ public final class DBResourceManager {
 	public static final String CHARACTER_ENCODING = "characterEncoding";
 	public static final String USE_ENCODING = "useUnicode";
 
-	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("configuration/database");
 
 	public static String getProperty(String key) {
 		return resourceBundle.getString(key);

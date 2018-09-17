@@ -1,0 +1,14 @@
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+<c:if test="${not empty user}">
+	<c:choose>
+		<c:when test="${userType.name == 'admin' }">
+			<c:redirect url="/controller?command=user_list" />
+		</c:when>
+		<c:when test="${userType.name == 'user'}">
+			<c:redirect url="/controller?command=user_list" />
+		</c:when>
+		<c:when test="${userType.name == 'guest'}">
+			<c:redirect url="/controller?command=user_list" />
+		</c:when>
+	</c:choose>
+</c:if>

@@ -19,6 +19,8 @@ public class CommandContainer {
 	static {
 		// common commands
 		commands.put("login", new LoginCommand(new GuestLogic()));
+		commands.put("user_list", new UserListCommand(new GuestLogic()));
+
 		//commands.put("logout", new LogoutCommand());
 		//commands.put("commandNotFound", new NoCommand());
 		

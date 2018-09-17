@@ -49,6 +49,7 @@ public class FrontController extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		LOGGER.debug("Controller starts");
+		LOGGER.debug(request.getParameter("command"));
 
 		String commandName = request.getParameter("command");
 		LOGGER.trace("Request parameter: command --> " + commandName);
@@ -60,6 +61,7 @@ public class FrontController extends HttpServlet {
 		try {
 			requestProcessorInfo = command.execute(request, response);
 		} catch (ApplicationException ex) {
+			ex.printStackTrace();
 			request.setAttribute("errorMessage", ex.getMessage());
 		}
 		LOGGER.trace("Forward address --> " + requestProcessorInfo.getPath());

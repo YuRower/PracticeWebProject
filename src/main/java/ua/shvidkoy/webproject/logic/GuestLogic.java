@@ -12,9 +12,9 @@ public class GuestLogic extends ApplicationLogic {
 	public User findUserByLogin(String login) throws LogicException, ConnectionException {
 
 		try {
-			TransactionManager.beginTransaction();
+			//TransactionManager.beginTransaction();
 			User user = userDao.findUserByLogin(login);
-			TransactionManager.commitTransaction();
+		//	TransactionManager.commitTransaction();
 
 			return user;
 		} catch (MySqlException e) {

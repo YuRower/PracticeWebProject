@@ -40,8 +40,9 @@ public class UserListCommand extends CommandStrategy {
 
 		List<User> users = guestLogic.findAllUsers();
 		if (users.isEmpty()) {
-			LOGGER.trace("zero users ");
+			LOGGER.info("zero users ");
 		}
+		LOGGER.info(users.toString());
 
 		session.setAttribute("users", users);
 

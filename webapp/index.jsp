@@ -48,9 +48,9 @@
 		</form>
 	</div>
 
-	<c:set var="title" value="Users" />
+<c:set var="title" value="Users" />
 <body>
-
+<table>
 	<tr>
 		<td class="content center"><c:if test="${  empty users}">
 				<h3>User List</h3>
@@ -60,10 +60,9 @@
 						<th>Name</th>
 						<th>Surname</th>
 						<th>Login</th>
-						<th>Access</th>
 						<th colspan="2">Actions</th>
 					</tr>
-					<c:forEach var="admin" items="${users}">
+					<c:forEach var="users" items="${users}">
 						<tr>
 							<td><fmt:formatNumber type="number" minIntegerDigits="3"
 									value="${users.id}" /></td>
@@ -74,6 +73,8 @@
 				</table>
 			</c:if></td>
 	</tr>
+</table>
+
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 
 

@@ -14,11 +14,11 @@ public class GuestLogic extends ApplicationLogic {
 		try {
 			//TransactionManager.beginTransaction();
 			User user = userDao.findUserByLogin(login);
-		//	TransactionManager.commitTransaction();
+			//TransactionManager.commitTransaction();
 
 			return user;
 		} catch (MySqlException e) {
-			TransactionManager.rollbackTransaction();
+			//TransactionManager.rollbackTransaction();
 
 			throw new LogicException(e);
 		}

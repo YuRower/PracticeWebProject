@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import ua.shvidkoy.webproject.controller.FrontController;
 
 public final class DBConnector {
-	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
+	private final static Logger LOGGER = Logger.getLogger(DBConnector.class);
 
 
     /*
@@ -30,6 +30,7 @@ public final class DBConnector {
 	private static final String PASSWORD = DBResourceManager.getProperty(DBResourceManager.PASSWORD);
 
 	public static Connection getConnection() throws SQLException {
+		LOGGER.info(URL + " " + PASSWORD + " " + USER);
 		Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 		return connection;
 	}

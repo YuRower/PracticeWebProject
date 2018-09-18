@@ -19,8 +19,6 @@ import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.User;
 import ua.shvidkoy.webproject.model.enums.Role;
 import ua.shvidkoy.webproject.utill.PasswordHasher;
-import ua.shvidkoy.webproject.utill.PasswordHasher.CannotPerformOperationException;
-import ua.shvidkoy.webproject.utill.PasswordHasher.InvalidHashException;
 
 public class LoginCommand extends CommandStrategy {
 	private GuestLogic guestLogic;
@@ -42,6 +40,7 @@ public class LoginCommand extends CommandStrategy {
 
 		String password = request.getParameter("password");
 		LOGGER.info("Request parameter: password --> " + password);
+		//password = PasswordHash1.createHash(password);
 
 		if (login == null || password == null || login.trim().isEmpty() || password.trim().isEmpty()) {
 			throw new ApplicationException("Email/password cannot be empty");
@@ -50,7 +49,7 @@ public class LoginCommand extends CommandStrategy {
 		User user = guestLogic.findUserByLogin(login);
 		LOGGER.trace("Found in DB: user --> " + user);
 
-		try {
+		/*try {
 			if (user == null || !PasswordHasher.verifyPassword(password, user.getPassword())) {
 				throw new ApplicationException("Cannot find user with such login/password");
 			}
@@ -60,7 +59,7 @@ public class LoginCommand extends CommandStrategy {
 		} catch (InvalidHashException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		Role userType = Role.getRole(user);
 		LOGGER.trace("userType --> " + userType);
@@ -69,13 +68,15 @@ public class LoginCommand extends CommandStrategy {
 
 		switch (userType) {
 		case ADMIN:
-			forward = Path.COMMAND_LIST_REQUESTS;
+			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
 			break;
 		case USER:
 			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
 			break;
 		case GUEST:
-			forward = Path.COMMAND_LIST_ADMINS;
+		//	forward = Path.COMMAND_LIST_ADMINS;
+			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
+
 			break;
 		default:
 			throw new ApplicationException("Unresolved usertype");

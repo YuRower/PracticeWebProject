@@ -89,7 +89,7 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 		close(stmt);
 		close(con);
 }
-	public void rollback(Connection con) {
+	/*public void rollback(Connection con) {
 		if (con != null) {
 			try {
 				con.rollback();
@@ -97,6 +97,6 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 				LOGGER.error("Cannot rollback transaction", ex);
 			}
 		}
-	}
+	}*/
 
 }

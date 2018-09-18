@@ -1,0 +1,83 @@
+<%--=========================================================================== 
+Header (top area). 
+===========================================================================--%> 
+
+<%@ page import="ua.shvidkoy.webproject.model.enums.Role" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
+<tr>
+<td id="header">
+
+<c:if test="${not empty user}">
+<%--=========================================================================== 
+This is the user menu. 
+===========================================================================--%> 
+
+<div id="leftHeader">
+
+	<c:choose>
+
+<%--=========================================================================== 
+This way we define the ADMIN MENU. 
+===========================================================================--%> 
+
+<c:when test="${role.name == 'guest' }">
+			<a href="front_controller?command=listRequests">Requests</a> &nbsp;
+			<a href="front_controller?command=actionsPage">Actions</a> &nbsp;
+		</c:when>
+		<c:when test="${role.name == 'admin' }">
+			<a href="front_controller?command=listRequests">Requests</a> &nbsp;
+			<a href="front_controller?command=actionsPage">Actions</a> &nbsp;
+		</c:when>
+
+		
+<%--=========================================================================== 
+This way we define the USER MENU.
+===========================================================================--%> 
+		<c:when test="${role.name == 'user'}">
+			<a href="front_controller?command=listCards">Cards</a> &nbsp;
+			<a href="front_controller?command=listAccounts">Accounts</a> &nbsp;
+			<a href="front_controller?command=listCart">Cart</a> &nbsp;
+		</c:when>
+	</c:choose>
+	
+<%--=========================================================================== 
+This way we define the settings anchor.
+===========================================================================--%> 
+
+</div>
+
+<%--=========================================================================== 
+This way we define the menu located at the right of header. 
+===========================================================================--%> 
+<div id="rightHeader" >
+
+<%--=========================================================================== 
+Type user name if the user object is presented in the current session.  
+===========================================================================--%> 
+	
+<%--=========================================================================== 
+Type user role name if the user object is presented in the current session.  
+===========================================================================--%> 
+	<c:if test="${not empty role}">
+		<c:out value="(${role.name})"/>
+	</c:if>
+
+<%--=========================================================================== 
+Type link to logout  
+===========================================================================--%> 
+	
+
+</div>
+</c:if>
+
+<c:if test="${title eq 'guest'}">
+	<div id="rightHeader">
+		<a href="front_controller?command=user_list">Login</a>
+	</div>
+	
+</c:if>
+
+	</td>
+</tr>

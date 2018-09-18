@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/jspf/user_type.jspf"%>
+	<%@ include file="/WEB-INF/jspf/user_role.jspf"%>
 
 	<button onclick="document.getElementById('id01').style.display='block'"
 		style="width: auto;">Login</button>
@@ -48,11 +48,13 @@
 		</form>
 	</div>
 
-<c:set var="title" value="Users" />
+<c:set var="title" value="guest" />
 <body>
 <table>
+	<%@ include file="/WEB-INF/jspf/head.jspf"%>
 	<tr>
-		<td class="content center"><c:if test="${  empty users}">
+		<td class="content center">
+		<c:if test="${ not empty user}">
 				<h3>User List</h3>
 				<table class="center">
 					<tr>
@@ -60,15 +62,17 @@
 						<th>Name</th>
 						<th>Surname</th>
 						<th>Login</th>
-						<th colspan="2">Actions</th>
+						<th colspan="2">Role</th>
 					</tr>
-					<c:forEach var="users" items="${users}">
+					<c:forEach  var="user" items="${users}">
 						<tr>
 							<td><fmt:formatNumber type="number" minIntegerDigits="3"
-									value="${users.id}" /></td>
-							<td><c:out value="${users.name}" /></td>
-							<td><c:out value="${users.surname}" /></td>
-							<td><c:out value="${users.email}" /></td>
+									value="${user.id}" /></td>
+							<td><c:out value="${user.firstName}" /></td>
+							<td><c:out value="${user.lastName}" /></td>
+							<td><c:out value="${user.login}" /></td>
+							<td><c:out value="${user.userRoleId}" /></td>
+							
 					</c:forEach>
 				</table>
 			</c:if></td>

@@ -26,6 +26,8 @@ public class UserListCommand extends CommandStrategy {
 		this.guestLogic = guestLogic;
 	}
 
+	
+
 	@Override
 	public Router execute(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException, ApplicationException {
@@ -45,6 +47,7 @@ public class UserListCommand extends CommandStrategy {
 		LOGGER.info(users.toString());
 
 		session.setAttribute("users", users);
+		session.setAttribute("userRole", "guest");
 
 		LOGGER.trace("Set the session attribute: users --> " + users);
 

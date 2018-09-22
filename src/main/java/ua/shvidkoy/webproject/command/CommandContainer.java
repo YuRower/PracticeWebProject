@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 
 import ua.shvidkoy.webproject.command.guest.LoginCommand;
+import ua.shvidkoy.webproject.command.user.UserListCommand;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 
 
@@ -19,13 +20,12 @@ public class CommandContainer {
 	static {
 		// common commands
 		commands.put("login", new LoginCommand(new GuestLogic()));
-		commands.put("user_list", new UserListCommand(new GuestLogic()));
+		commands.put("init_user_list", new UserListCommand(new GuestLogic()));
 
 		//commands.put("logout", new LogoutCommand());
 		//commands.put("commandNotFound", new NoCommand());
 		
 		// admin commands
-		//commands.put("initializeUserSession", new InitializeUserSessionCommand());
 		//commands.put("new_user", new NewUserCommand());
 		//commands.put("view_user", new ViewUserCommand());
 		//commands.put("update_user", new UpdateUserCommand());
@@ -49,7 +49,7 @@ public class CommandContainer {
 	
 	public static CommandStrategy get(String commandName) {
 		if (commandName == null || !commands.containsKey(commandName)) {
-			LOGGER.trace("Command not found, name --> " + commandName);
+			LOGGER.info("Command not found, name --> " + commandName);
 			return commands.get("commandNotFound"); 
 		}
 		

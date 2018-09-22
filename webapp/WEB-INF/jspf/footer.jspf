@@ -1,10 +1,5 @@
 
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/tether.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/mdb.min.js"></script>
+
 <footer>
         <p>&copy; Copyright ${currentYear} Yura Shvidkoy &amp; Associates, Inc. 
             All rights reserved.</p>

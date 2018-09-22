@@ -72,9 +72,9 @@ Type link to logout
 </div>
 </c:if>
 
-<c:if test="${title eq 'guest'}">
+<c:if test="${title eq 'user'}">
 	<div id="rightHeader">
-		<a href="front_controller?command=user_list">Login</a>
+		<a href="front_controller?command=user_list">log out</a>
 	</div>
 	
 </c:if>

@@ -10,8 +10,15 @@ Bind CSS document. <link rel="stylesheet" type="text/css" media="screen" href="s
 ===========================================================================--%>
 <link rel="stylesheet" type="text/css" media="screen"
 	href="style/style.css" />
-
+ <!-- REQUIRED SCRIPTS FILES -->
+    <!-- CORE JQUERY FILE -->
+    <script src="js/jquery-1.js"></script>
+    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+    <script src="js/bootstrap.js"></script>
 <script src="js/close.js"></script>
+  <link href="style/bootstrap.css" rel="stylesheet">
+    <link href="style/font-awesome.css" rel="stylesheet">
+    
 <%--=========================================================================== 
 If you define http-equiv attribute, set the content type and the charset the same
 as you set them in a page directive. <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -1,6 +1,7 @@
 package ua.shvidkoy.webproject.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
@@ -14,12 +15,15 @@ import org.apache.log4j.Logger;
 
 import ua.shvidkoy.webproject.command.CommandContainer;
 import ua.shvidkoy.webproject.command.CommandStrategy;
-import ua.shvidkoy.webproject.command.UserListCommand;
+import ua.shvidkoy.webproject.command.user.UserListCommand;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
+import ua.shvidkoy.webproject.exception.ConnectionException;
+import ua.shvidkoy.webproject.exception.LogicException;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
+import ua.shvidkoy.webproject.model.entity.User;
 
 public class FrontController extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
@@ -40,6 +44,7 @@ public class FrontController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
 		process(req, resp);
 	}
 

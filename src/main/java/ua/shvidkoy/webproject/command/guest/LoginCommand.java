@@ -22,7 +22,7 @@ import ua.shvidkoy.webproject.utill.PasswordHasher;
 
 public class LoginCommand extends CommandStrategy {
 	private GuestLogic guestLogic;
-	private final static Logger LOGGER = Logger.getLogger(CommandContainer.class);
+	private final static Logger LOGGER = Logger.getLogger(LoginCommand.class);
 
 	public LoginCommand(GuestLogic guestLogic) {
 		this.guestLogic = guestLogic;
@@ -60,9 +60,10 @@ public class LoginCommand extends CommandStrategy {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		LOGGER.info("userRole --> " + user);
 
 		Role userRole = Role.getRole(user);
-		LOGGER.trace("userRole --> " + userRole);
+		LOGGER.info("userRole --> " + userRole);
 
 		String forward;
 
@@ -83,10 +84,10 @@ public class LoginCommand extends CommandStrategy {
 		}
 
 		session.setAttribute("user", user);
-		LOGGER.trace("Set the session attribute: user --> " + user);
+		LOGGER.info("Set the session attribute: user --> " + user);
 
 		session.setAttribute("userRole", userRole);
-		LOGGER.trace("Set the session attribute: userType --> " + userRole);
+		LOGGER.info("Set the session attribute: userType --> " + userRole);
 
 		LOGGER.info("User " + user + " logged as " + userRole.toString().toLowerCase());
 

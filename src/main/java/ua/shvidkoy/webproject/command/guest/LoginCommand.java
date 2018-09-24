@@ -62,12 +62,12 @@ public class LoginCommand extends CommandStrategy {
 		}*/
 		LOGGER.info("userRole --> " + user);
 
-		Role userRole = Role.getRole(user);
-		LOGGER.info("userRole --> " + userRole);
+		Role role = Role.getRole(user);
+		LOGGER.info("userRole --> " + role);
 
 		String forward;
 
-		switch (userRole) {
+		switch (role) {
 		case ADMIN:
 			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
 			break;
@@ -86,10 +86,10 @@ public class LoginCommand extends CommandStrategy {
 		session.setAttribute("user", user);
 		LOGGER.info("Set the session attribute: user --> " + user);
 
-		session.setAttribute("userRole", userRole);
-		LOGGER.info("Set the session attribute: userType --> " + userRole);
+		session.setAttribute("role", role);
+		LOGGER.info("Set the session attribute: userType --> " + role);
 
-		LOGGER.info("User " + user + " logged as " + userRole.toString().toLowerCase());
+		LOGGER.info("User " + user + " logged as " + role.toString().toLowerCase());
 
 		LOGGER.debug("Command finished");
 		return new Router(RouteType.REDIRECT, forward);

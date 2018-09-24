@@ -1,10 +1,15 @@
 
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 <html><head>
+ <link href="style/bootstrap.min.css" rel="stylesheet">
+    <link href="style/font-awesome.css" rel="stylesheet">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
     <title>user profile</title>
 <body class="">
+
     <div class="container">
         <section style="padding-bottom: 50px; padding-top: 50px;">
             <div class="row">
@@ -50,6 +55,7 @@
                 </div>
         </section>
     </div>
+    
     	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
     
     </body>

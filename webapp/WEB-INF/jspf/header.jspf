@@ -10,18 +10,50 @@ Bind CSS document. <link rel="stylesheet" type="text/css" media="screen" href="s
 ===========================================================================--%>
 <link rel="stylesheet" type="text/css" media="screen"
 	href="style/style.css" />
- <!-- REQUIRED SCRIPTS FILES -->
-    <!-- CORE JQUERY FILE -->
-    <script src="js/jquery-1.js"></script>
-    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
-    <script src="js/bootstrap.js"></script>
+<!-- REQUIRED SCRIPTS FILES -->
+<!-- CORE JQUERY FILE -->
+<script src="js/jquery-1.js"></script>
+<!-- REQUIRED BOOTSTRAP SCRIPTS -->
+<script src="js/bootstrap.js"></script>
 <script src="js/close.js"></script>
-  <link href="style/bootstrap.css" rel="stylesheet">
-    <link href="style/font-awesome.css" rel="stylesheet">
-    
+
+
 <%--=========================================================================== 
 If you define http-equiv attribute, set the content type and the charset the same
 as you set them in a page directive. <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 ===========================================================================--%>
 <meta charset="UTF-8">
 </head>
+
+<body>
+	<c:choose>
+	
+		<c:when test="${ roleId eq 'user' }">
+User is user
+<c:set var="title" value="Log out" />
+
+			<br />
+		</c:when>
+		<c:when test="${ roleId eq 'guest' }">
+User is guest
+
+			<c:set var="title" value="Log in " />
+			<br />
+		</c:when>
+		<c:otherwise>
+			<c:set var="title" value="Logout" />
+			<br />
+		</c:otherwise>
+	</c:choose>
+
+
+	<div class="header">
+		<div id="id00">
+			<button onclick="displayModalWindow()" style="width: auto;">${title}</button>
+		</div>
+
+	</div>
+
+
+
+</body>

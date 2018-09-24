@@ -1,83 +1,77 @@
 <%--=========================================================================== 
 Header (top area). 
-===========================================================================--%> 
+===========================================================================--%>
 
-<%@ page import="ua.shvidkoy.webproject.model.enums.Role" %>
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
-
+<%@ page import="ua.shvidkoy.webproject.model.enums.Role"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+<script src="js/jquery-1.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <tr>
-<td id="header">
-
-<c:if test="${not empty user}">
-<%--=========================================================================== 
+	<td id="header">
+		<%--=========================================================================== 
 This is the user menu. 
-===========================================================================--%> 
+===========================================================================--%>
 
-<div id="leftHeader">
+		<div id="leftHeader">
 
-	<c:choose>
+			<c:choose>
 
-<%--=========================================================================== 
+				<%--=========================================================================== 
 This way we define the ADMIN MENU. 
-===========================================================================--%> 
+===========================================================================--%>
 
-<c:when test="${role.name == 'guest' }">
-			<a href="front_controller?command=listRequests">Requests</a> &nbsp;
-			<a href="front_controller?command=actionsPage">Actions</a> &nbsp;
-		</c:when>
-		<c:when test="${role.name == 'admin' }">
-			<a href="front_controller?command=listRequests">Requests</a> &nbsp;
-			<a href="front_controller?command=actionsPage">Actions</a> &nbsp;
-		</c:when>
+				<c:when test="${role.name == 'guest' }">
+					<div class="text-center">
 
+					</div>
+				</c:when>
+				<c:when test="${role.name == 'admin' }">
+				<c:set var="roleId" value="admin" />
+		admin
+		<script>
 		
-<%--=========================================================================== 
+
+				$(".header").css("background-color", "green");
+				$("footer").css("background-color", "green");
+		</script>
+				</c:when>
+
+
+				<%--=========================================================================== 
 This way we define the USER MENU.
-===========================================================================--%> 
-		<c:when test="${role.name == 'user'}">
-			<a href="front_controller?command=listCards">Cards</a> &nbsp;
-			<a href="front_controller?command=listAccounts">Accounts</a> &nbsp;
-			<a href="front_controller?command=listCart">Cart</a> &nbsp;
-		</c:when>
-	</c:choose>
-	
-<%--=========================================================================== 
+===========================================================================--%>
+				<c:when test="${role.name == 'user'}">
+								<c:set var="roleId" value="user"  />
+				
+		user
+				<script>
+				
+
+						$(".header").css("background-color", "orange");
+						$("footer").css("background-color", "orange");
+				</script>
+
+
+				</c:when>
+			</c:choose>
+
+			<%--=========================================================================== 
 This way we define the settings anchor.
-===========================================================================--%> 
+===========================================================================--%>
 
-</div>
-
-<%--=========================================================================== 
+		</div> <%--=========================================================================== 
 This way we define the menu located at the right of header. 
-===========================================================================--%> 
-<div id="rightHeader" >
+===========================================================================--%>
 
-<%--=========================================================================== 
-Type user name if the user object is presented in the current session.  
-===========================================================================--%> 
-	
-<%--=========================================================================== 
-Type user role name if the user object is presented in the current session.  
-===========================================================================--%> 
-	<c:if test="${not empty role}">
-		<c:out value="(${role.name})"/>
-	</c:if>
 
-<%--=========================================================================== 
-Type link to logout  
-===========================================================================--%> 
-	
+		<c:if test="${roleId eq 'user'}">
+			<div id="rightHeader">
+				<a href="front_controller?command=logout">log out</a>
+			</div>
 
-</div>
-</c:if>
-
-<c:if test="${title eq 'user'}">
-	<div id="rightHeader">
-		<a href="front_controller?command=user_list">log out</a>
-	</div>
-	
-</c:if>
+		</c:if>
 
 	</td>
 </tr>

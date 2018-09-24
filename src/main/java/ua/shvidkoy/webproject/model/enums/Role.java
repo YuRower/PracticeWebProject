@@ -15,14 +15,12 @@ public enum Role {
 		int roleId = user.getUserRoleId();
 		return Role.values()[roleId];
 	}
-	public static Role getRole(int roleId) {
+	public static Role getRole(Integer roleId) {
 		return Role.values()[roleId];
 	}
 	
 	
 	public String getName() {
-		LOGGER.info("----------------------"+ name());
-
 		return name().toLowerCase();
 	}
 	

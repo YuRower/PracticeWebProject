@@ -48,14 +48,14 @@ public class UserListCommand extends CommandStrategy {
 		LOGGER.info(users.toString());
 		
 		 
-		Role userRole = Role.getRole(1);
-		LOGGER.info("userRole --> " + userRole);
+		//Role role = Role.getRole();
+		//LOGGER.info("role --> " + role);
 		
 		session.setAttribute("users", users);
 
 		LOGGER.debug("Set the session attribute: users --> " + users);
-		session.setAttribute("userRole", userRole);
-		LOGGER.info("Set the session attribute: userRole--> " + userRole);
+		//session.setAttribute("role", role);
+	//	LOGGER.info("Set the session attribute: userRole--> " + role);
 
 		LOGGER.debug("Command finished");
 		// String forward = Path.COMMAND_INITIALIZE_USER;

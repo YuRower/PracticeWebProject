@@ -23,18 +23,18 @@ This way we define the ADMIN MENU.
 ===========================================================================--%>
 
 				<c:when test="${role.name == 'guest' }">
-					<div class="text-center">
-
-					</div>
+					<div class="text-center"></div>
 				</c:when>
 				<c:when test="${role.name == 'admin' }">
-				<c:set var="roleId" value="admin" />
+					<c:set var="roleId" value="admin" />
 		admin
 		<script>
 		
+			$(function() {
 
 				$(".header").css("background-color", "green");
 				$("footer").css("background-color", "green");
+			});
 		</script>
 				</c:when>
 
@@ -43,14 +43,17 @@ This way we define the ADMIN MENU.
 This way we define the USER MENU.
 ===========================================================================--%>
 				<c:when test="${role.name == 'user'}">
-								<c:set var="roleId" value="user"  />
+					<c:set var="roleId" value="user" />
 				
 		user
+		
+		
 				<script>
-				
-
-						$(".header").css("background-color", "orange");
+					$(function() {
+						makeLink();
+					     $(".header").css("background-color", "orange");
 						$("footer").css("background-color", "orange");
+					});
 				</script>
 
 
@@ -66,7 +69,7 @@ This way we define the menu located at the right of header.
 ===========================================================================--%>
 
 
-		<c:if test="${roleId eq 'user'}">
+		<c:if test="${roleId ne 'guest'}">
 			<div id="rightHeader">
 				<a href="front_controller?command=logout">log out</a>
 			</div>

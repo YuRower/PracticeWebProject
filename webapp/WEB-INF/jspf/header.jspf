@@ -35,8 +35,6 @@ User is user
 			<br />
 		</c:when>
 		<c:when test="${ roleId eq 'guest' }">
-User is guest
-
 			<c:set var="title" value="Log in " />
 			<br />
 		</c:when>

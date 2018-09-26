@@ -44,7 +44,7 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 	}
 
 	@Override
-	public PhotoDAO getPhoto() {
+	public PhotoDAO getPhotoDAO() {
 		return new PhotoDAOimpl(instance);
 	}
 

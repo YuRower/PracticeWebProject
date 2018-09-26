@@ -50,25 +50,27 @@
 	</div>
 <body>
 	<%@ include file="/WEB-INF/jspf/head.jspf"%>
-	<table>
+
+	<jsp:useBean id="photo" scope="request"
+		class="ua.shvidkoy.webproject.model.entity.Photo" />
+	<table id="myTable">
 		<tr>
 			<td class="content center">
-
 				<h3>User List</h3>
 				<table class="center">
-					<tr>
+					<tr class="headTable">
 						<th>ID</th>
 						<th>Name</th>
 						<th>Surname</th>
 						<th>Login</th>
 						<th>Role</th>
-						<th colspan="5">Photo</th>
-						
+						<th>Photo</th>
 					</tr>
 					<c:forEach var="user" items="${users}">
 						<tr>
 							<td><fmt:formatNumber type="number" minIntegerDigits="3"
 									value="${user.id}" /></td>
+
 							<td><c:out value="${user.firstName}" /></td>
 							<td><c:out value="${user.lastName}" /></td>
 							<td><c:out value="${user.login}" /></td>
@@ -83,34 +85,44 @@
 									<td><c:out value="Guest" /></td>
 								</c:otherwise>
 							</c:choose>
-							<td><c:out value="${user.userPhotoId}" /></td>
+
+
+							<c:forEach var="photo" items="${photos}">
+								<c:if test="${user.userPhotoId eq photo.id}">
+									<td><img src="img/${photo.name}" alt="not found"
+										style="width: 128px; height: 128px;" /></td>
+								</c:if>
+
+							</c:forEach>
+							<c:if test="${role.name eq 'admin'}">
+							
+								<td>
+
+									<button type="button" data-toggle="modal"
+										data-target="#delete_confirm_modal"
+										style="color: White; background-color: #d9534f; width: 50%;">
+										Delete</button>
+								</td>
+							</c:if>
 					</c:forEach>
+
+
 				</table>
 		</tr>
 	</table>
 
-	<!--  <div class="row">
 
-		<form action="front_controller" method="get">
-
-			<input type="hidden" name="command" value="add_user" />
-
-			<div class="col-xs-5">
-				<div class="text-right">
-					<button type="button" class="btn btn-default">Add User</button>
-				</div>
-			</div>
-		</form>
-	</div>-->
 
 	<c:if test="${role.name eq 'admin'}">
-
+		<script>
+			$('tr.headTable').append('<th colspan="5">Delete User</th>');
+		</script>
 
 		<div class="container">
-			<a href="front_controller?command=add_user" class="btn btn-info"
-				role="button">Add User</a>
-
+			<a href="front_controller?command=add_user" class="button">Add
+				User</a>
 		</div>
+
 	</c:if>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 

@@ -16,10 +16,11 @@ import ua.shvidkoy.webproject.exception.MySqlException;
 import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
 import ua.shvidkoy.webproject.model.connectionpool.ProxyConnection;
 import ua.shvidkoy.webproject.model.dao.UserDAO;
+import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
 
 public class UserDAOimpl implements UserDAO {
-	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
+	private final static Logger LOGGER = Logger.getLogger(UserDAOimpl.class);
 
 	private MysqlDAOFactory factory;
 
@@ -36,10 +37,8 @@ public class UserDAOimpl implements UserDAO {
 	public static final String USER_PHOTO_ID = "id_photo";
 	// SQL queries
 	private static final String SQL_REMOVE_ADMIN = "DELETE FROM user WHERE user_id=?";
-	private static final String SQL_FIND_ADMINS = "SELECT * FROM user WHERE user_type_id=1";
 	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM user";
 	private static final String SQL_INSERT_USER_FULL_INFO = "INSERT INTO user VALUES (DEFAULT,?, ?, ?, ?, ?, ?)";
-	private static final String SQL_INSERT_USER_SHORT_VARIANT = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, DEFAULT, DEFAULT)";
 	private static final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?, last_name = ?, login = ?, "
 			+ "password=?, id_role = ?, id_photo = ? WHERE user_id=?";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";

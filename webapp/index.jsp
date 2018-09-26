@@ -14,6 +14,7 @@
 	<c:set var="roleId" value="guest" scope="session" />
 	<jsp:forward page="/front_controller">
 		<jsp:param name="command" value="init_user_list"></jsp:param>
+		
 	</jsp:forward>
 </body>
 </html>

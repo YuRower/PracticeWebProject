@@ -1,8 +1,6 @@
-package ua.shvidkoy.webproject.command.user;
+package ua.shvidkoy.webproject.command.guest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,55 +18,31 @@ import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
-import ua.shvidkoy.webproject.model.enums.Role;
 
-public class UserListCommand extends CommandStrategy {
+public class PresentPhotoCommand extends CommandStrategy {
+	private final static Logger LOGGER = Logger.getLogger(PresentPhotoCommand.class);
 	private GuestLogic guestLogic;
-	Logger LOGGER = Logger.getLogger(UserListCommand.class);
 
-	public UserListCommand(GuestLogic guestLogic) {
+	public PresentPhotoCommand(GuestLogic guestLogic) {
 		this.guestLogic = guestLogic;
 	}
 
 	@Override
 	public Router execute(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException, ApplicationException {
-		// TODO Auto-generated method stub
-
 		LOGGER.debug("Command starts");
 
 		HttpSession session = request.getSession();
 
-		User user = (User) session.getAttribute("user");
-		LOGGER.debug("User --> " + user);
 
-		List<User> users = guestLogic.findAllUsers();
-		if (users.isEmpty()) {
-			LOGGER.info("zero users ");
-		}
-		LOGGER.info(users.toString());
 
 		List<Photo> photos = guestLogic.loadPhoto();
-		session.setAttribute("photos", photos);
+		session.setAttribute("photo", photos);
 		LOGGER.debug("Set the session attribute: photo --> " + photos);
 		LOGGER.debug("Command finished");
 
-		 
-		//Role role = Role.getRole();
-		//LOGGER.info("role --> " + role);
-		
-		session.setAttribute("users", users);
-
-		LOGGER.debug("Set the session attribute: users --> " + users);
-		//session.setAttribute("role", role);
-	//	LOGGER.info("Set the session attribute: userRole--> " + role);
-
-		LOGGER.debug("Command finished");
-		// String forward = Path.COMMAND_INITIALIZE_USER;
-
 		return new Router(RouteType.FORWARD, Path.PAGE_START);
 
-		// return new Router(RouteType.REDIRECT, forward);
 	}
 
 }

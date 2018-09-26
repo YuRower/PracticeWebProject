@@ -14,7 +14,7 @@ public abstract class AbstractDAOFactory {
 	}
 
 	public abstract UserDAO getUserDAO();
-	public abstract PhotoDAO getPhoto();
+	public abstract PhotoDAO getPhotoDAO();
 	public abstract UserToRoleDAO getUserToRoleDAO();
 
 	public static AbstractDAOFactory getDAOFactory(FactoryTypes type) {//throws MySqlException, ConnectionException, SQLException {

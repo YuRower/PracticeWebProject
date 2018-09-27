@@ -95,9 +95,8 @@
 
 							</c:forEach>
 							<c:if test="${role.name eq 'admin'}">
-							
+						
 								<td>
-
 									<button type="button" data-toggle="modal"
 										data-target="#delete_confirm_modal"
 										style="color: White; background-color: #d9534f; width: 50%;">

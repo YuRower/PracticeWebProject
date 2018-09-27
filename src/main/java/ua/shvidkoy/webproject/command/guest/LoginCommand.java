@@ -48,7 +48,7 @@ public class LoginCommand extends CommandStrategy {
 
 		User user = guestLogic.findUserByLogin(login);
 		LOGGER.trace("Found in DB: user --> " + user);
-
+		password = PasswordHasher.getHash(password);
 		/*try {
 			if (user == null || !PasswordHasher.verifyPassword(password, user.getPassword())) {
 				throw new ApplicationException("Cannot find user with such login/password");

@@ -43,6 +43,8 @@ public class UserDAOimpl implements UserDAO {
 			+ "password=?, id_role = ?, id_photo = ? WHERE user_id=?";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
 
+	private static final String SQL_INSERT_USER_SHORT_VARIANT ="INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
+
 	@Override
 	public User selectEntityById(int id) throws MySqlException, ConnectionException {
 		User user = null;
@@ -128,7 +130,36 @@ public class UserDAOimpl implements UserDAO {
 		}
 		return result;
 	}
+	@Override
+	public boolean newUserWithDefaultValues(User user) throws MySqlException, ConnectionException {
+		boolean result = false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProxyConnection con = null;
+		try {
+			con = factory.getProxyConnection();
+			pstmt = con.prepareStatement(SQL_INSERT_USER_SHORT_VARIANT, Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, user.getFirstName());
+			pstmt.setString(2, user.getLastName());
+			pstmt.setString(3, user.getLogin());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setInt(5, user.getUserRoleId());
 
+			if (pstmt.executeUpdate() > 0) {
+				rs = pstmt.getGeneratedKeys();
+				if (rs.next()) {
+					user.setId(rs.getInt(1));
+					result = true;
+				}
+			}
+		} catch (SQLException ex) {
+			LOGGER.error(Messages.ERR_CANNOT_INSERT_USER, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_INSERT_USER, ex);
+		} finally {
+			factory.close(con, pstmt, rs);
+		}
+		return result;
+}
 	@Override
 	public boolean removeEntity(User entity) throws MySqlException, ConnectionException {
 		boolean result = false;

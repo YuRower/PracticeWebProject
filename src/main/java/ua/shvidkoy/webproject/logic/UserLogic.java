@@ -15,6 +15,7 @@ public class UserLogic extends ApplicationLogic {
 
 	private static AbstractDAOFactory mysqlFactory = AbstractDAOFactory.getDAOFactory(FactoryTypes.MYSQL);
 	private static UserDAO userDao = mysqlFactory.getUserDAO();
+	private final static Logger LOGGER = Logger.getLogger(UserLogic.class);
 
 	public static long LoginUser(User user, String login) throws MySqlException, ConnectionException {
 		// user.setPassword(EncryptUtil.encryptString(user.getPassword()));
@@ -35,4 +36,5 @@ public class UserLogic extends ApplicationLogic {
 
 	}
 
+	
 }

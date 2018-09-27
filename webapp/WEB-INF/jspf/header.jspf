@@ -27,11 +27,10 @@ as you set them in a page directive. <meta http-equiv="Content-Type" content="te
 
 <body>
 	<c:choose>
-	
+
 		<c:when test="${ roleId eq 'user' }">
 User is user
 <c:set var="title" value="Log out" />
-
 			<br />
 		</c:when>
 		<c:when test="${ roleId eq 'guest' }">

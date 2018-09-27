@@ -11,5 +11,7 @@ public interface UserDAO extends CrudDAO<User> {
 
 	boolean isExist(String login) throws MySqlException, ConnectionException;
 
-	List<User> findAll() throws MySqlException, ConnectionException;;
+	List<User> findAll() throws MySqlException, ConnectionException;
+
+	boolean newUserWithDefaultValues(User user) throws  MySqlException, ConnectionException;;
 }

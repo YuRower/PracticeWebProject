@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<!-- coding: ${ pageContext.request.characterEncoding }-->
+	<!-- coding: ${ pageContext.request.characterEncoding }-->
 	<div id="id01" class="modal">
 
 		<form id="login_form" action="front_controller" method="post"
@@ -68,12 +68,11 @@
 					</tr>
 					<c:forEach var="user" items="${users}">
 						<tr>
-							<td><fmt:formatNumber type="number" minIntegerDigits="3"
-									value="${user.id}" /></td>
-
+							<td id="UserID"><c:out value="${user.id}" /></td>
 							<td><c:out value="${user.firstName}" /></td>
 							<td><c:out value="${user.lastName}" /></td>
 							<td><c:out value="${user.login}" /></td>
+
 							<c:choose>
 								<c:when test="${user.userRoleId== 1}">
 									<td><c:out value="Admin" /></td>
@@ -86,15 +85,18 @@
 								</c:otherwise>
 							</c:choose>
 
-
+							<c:if test="${user.userPhotoId eq '0'}">
+								<td><img src="img/img_avatar.png" style="width: 128px; height: 128px;"/></td>
+							</c:if>
 							<c:forEach var="photo" items="${photos}">
-							
+
 								<c:if test="${user.userPhotoId eq photo.id}">
+
 									<td><img src="img/${photo.name}"
 										onerror="if (this.src != 'img/img_avatar.png') this.src = 'img/img_avatar.png';"
 										style="width: 128px; height: 128px;" /></td>
 								</c:if>
-								
+
 
 							</c:forEach>
 							<c:if test="${role.name eq 'admin'}">
@@ -122,12 +124,10 @@
 		<script>
 			$('tr.headTable').append('<th colspan="5">Delete User</th>');
 		</script>
-
 		<div class="container">
 			<a href="front_controller?command=redirect_profile" class="button">Add
 				User</a>
 		</div>
-
 	</c:if>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 

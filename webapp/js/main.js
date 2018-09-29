@@ -22,19 +22,27 @@ function deleteConfirmation() {
     /*$("#delete_confirm_modal input#user_id").val($(element).attr('user_id'));*/
 }
 function makeLink(){
-	$(function() {
-		$("td:nth-child(2)").css(
+	
+		/*$("td:nth-child(2)").css(
 	            {
 	            "cursor":"pointer",
 	            "color":"blue",
 	            "text-decoration": "underline"
-	            });
+	            });*/
+		$("#myTable #UserID").css(
+	            {
+		            "cursor":"pointer",
+		            "color":"blue",
+		            "text-decoration": "underline"
+		            });
 
-	     $("td").click(function(){
+	  /* $("#myTable #UserID").click(function(){
 	    	var currentUser=$(this).text()
-	    	 alert(currentUser);
+	    	alert(currentUser);*/
+	    	//return currentUser;
 	    	 /*alert($(this).text());*/
-	    	
-	       window.location = "front_controller?command=redirect_profile";
-	     });
-});}
+	      // window.location = "front_controller?command=redirect_profile";
+	  
+
+	//return currentUserID;
+	}

@@ -1,12 +1,6 @@
 package ua.shvidkoy.webproject.filter;
 
-import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
@@ -14,52 +8,39 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-/**
- * Servlet Filter implementation class PageRedirectSecurityFilter
- 
-@WebFilter(urlPatterns = { "/*.jsp" }, initParams =
-{ @WebInitParam(name = "INDEX_PATH", value = "index.jsp") })
+import java.io.IOException;
+
+@WebFilter(urlPatterns = "/jsp/*")
 public class PageRedirectSecurityFilter implements Filter {
+    private String indexPath;
 	private final static Logger LOGGER = Logger.getLogger(PageRedirectSecurityFilter.class);
-	private String indexPath;
+	private static final String PARAM_NAME_COMMAND = "command";
 
-	/**
-	 * Default constructor.
-	 
-	public PageRedirectSecurityFilter() {
-		// TODO Auto-generated constructor stub
-	}
+    public void init(FilterConfig fConfig) throws ServletException {
+        LOGGER.info("Filter init " );
 
-	/**
-	 * @see Filter#destroy()
-	 
-	public void destroy() {
-		LOGGER.info("Filter destroy");
-	}
+    }
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		LOGGER.info("doFilter" );
-
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
+    	HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
-		LOGGER.info("Redirect on certain page" + indexPath);
 
-		chain.doFilter(request, response);
-	}
+		String command = httpRequest.getParameter(PARAM_NAME_COMMAND);
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 
-	public void init(FilterConfig fConfig) throws ServletException {
-		LOGGER.info("Filter init");
-		indexPath = fConfig.getInitParameter("INDEX_PATH");
+		if (command != null) {
+	        LOGGER.info("Command  " + command );
 
-	}
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/front_controller?command=" + command);
+		
+		} else {
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/front_controller?command=init_user_list");
+		}
+}
+    
 
-}*/
+    public void destroy() {
+        LOGGER.info("Filter destroy " );
+
+    }
+}

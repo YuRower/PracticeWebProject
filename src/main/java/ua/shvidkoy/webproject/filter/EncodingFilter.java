@@ -9,14 +9,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import org.apache.log4j.Logger;
+
+
 /**
  * Servlet Filter implementation class s
  */
 public class EncodingFilter implements Filter {
     private String encoding;
-    
+	private final static Logger LOGGER = Logger.getLogger(EncodingFilter.class);
+
     public void init(FilterConfig filterConfig) throws ServletException {
         encoding = filterConfig.getInitParameter("encoding");
+        LOGGER.info("Filter init " );
     }
     
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -32,6 +37,8 @@ public class EncodingFilter implements Filter {
     }
     
     public void destroy() {
+        LOGGER.info("Filter destroy " );
+
         encoding = null;
 }
 }

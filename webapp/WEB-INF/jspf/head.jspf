@@ -31,7 +31,6 @@ This way we define the ADMIN MENU.
 					
 		admin
 		<script>
-		
 			$(function() {
 
 				$(".header").css("background-color", "green");
@@ -45,30 +44,44 @@ This way we define the ADMIN MENU.
 This way we define the USER MENU.
 ===========================================================================--%>
 				<c:when test="${role.name == 'user'}">
-				<c:set var="roleId" value="user" />
-				<c:set var="title" value="Logout" />
-				<c:out value = "${role.name}" /> 
+					<c:set var="roleId" value="user" />
+					<c:set var="title" value="Logout" />
+					<c:out value="${role.name}" /> 
 		user
-		
-		
-				<script>
-					$(function() {
-						makeLink();
-					     $(".header").css("background-color", "orange");
-						$("footer").css("background-color", "orange");
-					});
-				</script>
+		<form>
+			<input type="hidden" name="command" value="redirect_profile" />
+						<input type="hidden" id="hiddenField" name="param" value="" />
+						<script>
+							$(function() {
+								makeLink();
+								var currentUserID = $("#myTable #UserID").click(function(){
+							    	var currentUser=$(this).text();
+							    	return currentUser;
+								});
+								
+								$(".header").css("background-color", "orange");
+								$("footer").css("background-color", "orange");
+							});
+						</script>
+					</form>
+						
 
 
 				</c:when>
 			</c:choose>
 
-			<%--=========================================================================== 
+			
+					<%--=========================================================================== 
 This way we define the settings anchor.
 ===========================================================================--%>
+				
 
-		</div> <%--=========================================================================== 
+		</div> 
+			<%--=========================================================================== 
 This way we define the menu located at the right of header. 
 ===========================================================================--%>
+						
 	</td>
 </tr>
+
+					

@@ -38,10 +38,10 @@ public class AdminLogic extends ApplicationLogic {
 
 	public static void deleteUser(User user) throws MySqlException, ConnectionException {
 		try {
-			TransactionManager.beginTransaction();
+			//TransactionManager.beginTransaction();
 			boolean isUserAdd = userDao.removeEntity(user);
 			LOGGER.info(isUserAdd + " status user delete");
-			TransactionManager.commitTransaction();
+			//TransactionManager.commitTransaction();
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 			TransactionManager.rollbackTransaction();
@@ -53,15 +53,21 @@ public class AdminLogic extends ApplicationLogic {
 
 	public void newUserWithDefaultValues(User user) throws MySqlException, ConnectionException {
 		try {
-			TransactionManager.beginTransaction();
+		//	TransactionManager.beginTransaction();
 			boolean isUserAdd = userDao.newUserWithDefaultValues(user);
 			LOGGER.info(isUserAdd + " status user add");
-			TransactionManager.commitTransaction();
+			//TransactionManager.commitTransaction();
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 			TransactionManager.rollbackTransaction();
 			throw e;
 
 		}
+	}
+
+	public void  getEntityById(int userId) throws MySqlException, ConnectionException {
+		User user = userDao.selectEntityById(userId);
+		LOGGER.info("USer that will be deleted --> "+ user);
+		deleteUser(user);
 	}
 }

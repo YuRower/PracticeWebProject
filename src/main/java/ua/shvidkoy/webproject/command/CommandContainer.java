@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 
 import ua.shvidkoy.webproject.command.admin.AddUserCommand;
+import ua.shvidkoy.webproject.command.admin.DeleteUserCommand;
 import ua.shvidkoy.webproject.command.admin.RedirectToProfileCommand;
 import ua.shvidkoy.webproject.command.guest.LoginCommand;
 import ua.shvidkoy.webproject.command.guest.PresentPhotoCommand;
@@ -32,12 +33,13 @@ public class CommandContainer {
 		 commands.put("commandNotFound", new NoCommand());
 
 		// admin commands
-		commands.put("add_user", new RedirectToProfileCommand());
+		commands.put("redirect_profile", new RedirectToProfileCommand());
 		commands.put("update_user", new AddUserCommand(new AdminLogic()));
+		//commands.put("redirect_profile", new RedirectAfterAddition());
 
 		// commands.put("view_user", new ViewUserCommand());
 		// commands.put("update_user", new UpdateUserCommand());
-		// commands.put("delete_user", new DeleteUserCommand());
+		 commands.put("delete_user", new DeleteUserCommand(new AdminLogic()));
 
 		// admin commands
 		// commands.put("actionsPage", new ActionsPageCommand());

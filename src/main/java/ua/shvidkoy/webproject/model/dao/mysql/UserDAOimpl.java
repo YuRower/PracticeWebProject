@@ -36,8 +36,10 @@ public class UserDAOimpl implements UserDAO {
 	public static final String USER_ROLE_ID = "id_role";
 	public static final String USER_PHOTO_ID = "id_photo";
 	// SQL queries
-	private static final String SQL_REMOVE_ADMIN = "DELETE FROM user WHERE user_id=?";
-	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM user";
+	private static final String SQL_REMOVE_ADMIN = "DELETE FROM user WHERE id_user=?";
+	private static final String SQL_FIND_ALL_USER = "SELECT * FROM user";
+	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM user WHERE id_user=?";
+
 	private static final String SQL_INSERT_USER_FULL_INFO = "INSERT INTO user VALUES (DEFAULT,?, ?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?, last_name = ?, login = ?, "
 			+ "password=?, id_role = ?, id_photo = ? WHERE user_id=?";
@@ -243,7 +245,7 @@ public class UserDAOimpl implements UserDAO {
 		try {
 			con = factory.getProxyConnection();
 			stmt = con.createStatement();
-			rs = stmt.executeQuery(SQL_FIND_USER_BY_ID);
+			rs = stmt.executeQuery(SQL_FIND_ALL_USER);
 			while (rs.next()) {
 				result.add(extractUser(rs));
 			}

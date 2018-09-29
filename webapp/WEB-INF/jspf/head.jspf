@@ -27,6 +27,8 @@ This way we define the ADMIN MENU.
 				</c:when>
 				<c:when test="${role.name == 'admin' }">
 					<c:set var="roleId" value="admin" />
+					<c:set var="title" value="Logout" />
+					
 		admin
 		<script>
 		
@@ -43,8 +45,9 @@ This way we define the ADMIN MENU.
 This way we define the USER MENU.
 ===========================================================================--%>
 				<c:when test="${role.name == 'user'}">
-					<c:set var="roleId" value="user" />
-				
+				<c:set var="roleId" value="user" />
+				<c:set var="title" value="Logout" />
+				<c:out value = "${role.name}" /> 
 		user
 		
 		
@@ -67,14 +70,5 @@ This way we define the settings anchor.
 		</div> <%--=========================================================================== 
 This way we define the menu located at the right of header. 
 ===========================================================================--%>
-
-
-		<c:if test="${roleId ne 'guest'}">
-			<div id="rightHeader">
-				<a href="front_controller?command=logout">log out</a>
-			</div>
-
-		</c:if>
-
 	</td>
 </tr>

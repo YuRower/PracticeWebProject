@@ -19,6 +19,9 @@ import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.User;
 import ua.shvidkoy.webproject.model.enums.Role;
 import ua.shvidkoy.webproject.utill.PasswordHasher;
+import ua.shvidkoy.webproject.utill.PasswordHasher1;
+import ua.shvidkoy.webproject.utill.PasswordHasher1.CannotPerformOperationException;
+import ua.shvidkoy.webproject.utill.PasswordHasher1.InvalidHashException;
 
 public class LoginCommand extends CommandStrategy {
 	private GuestLogic guestLogic;
@@ -40,26 +43,22 @@ public class LoginCommand extends CommandStrategy {
 
 		String password = request.getParameter("password");
 		LOGGER.info("Request parameter: password --> " + password);
-		//password = PasswordHash1.createHash(password);
+		// password = PasswordHash1.createHash(password);
 
 		if (login == null || password == null || login.trim().isEmpty() || password.trim().isEmpty()) {
 			throw new ApplicationException("Email/password cannot be empty");
 		}
 
 		User user = guestLogic.findUserByLogin(login);
-		LOGGER.trace("Found in DB: user --> " + user);
-		password = PasswordHasher.getHash(password);
-		/*try {
-			if (user == null || !PasswordHasher.verifyPassword(password, user.getPassword())) {
-				throw new ApplicationException("Cannot find user with such login/password");
-			}
-		} catch (CannotPerformOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidHashException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		LOGGER.info("Found in DB: user --> " + user);
+		//password = PasswordHasher.getHash(password);
+		/*String checkpassword = PasswordHasher.getHash("123");
+		LOGGER.info("Found in DB: user --> " + checkpassword);*/
+
+		/*if (user == null || !PasswordHasher.checkPassword(password, user.getPassword())) {
+			throw new ApplicationException("Cannot find user with such login/password");
 		}*/
+
 		LOGGER.info("userRole --> " + user);
 
 		Role role = Role.getRole(user);
@@ -75,7 +74,7 @@ public class LoginCommand extends CommandStrategy {
 			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
 			break;
 		case GUEST:
-		//	forward = Path.COMMAND_LIST_ADMINS;
+			// forward = Path.COMMAND_LIST_ADMINS;
 			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
 
 			break;

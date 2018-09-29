@@ -31,6 +31,10 @@ function makeLink(){
 	            });
 
 	     $("td").click(function(){
-	       window.location = "user_profile.jsp";
+	    	var currentUser=$(this).text()
+	    	 alert(currentUser);
+	    	 /*alert($(this).text());*/
+	    	
+	       window.location = "front_controller?command=redirect_profile";
 	     });
 });}

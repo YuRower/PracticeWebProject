@@ -24,8 +24,12 @@ public class RedirectToProfileCommand extends CommandStrategy {
 	@Override
 	public Router execute(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException, ApplicationException {
+		HttpSession session = request.getSession();
+	
 		LOGGER.debug("Command starts");
 		LOGGER.trace("Redirecting to profile page");
+		String param = request.getParameter("param");
+		LOGGER.info("Request parameter: action --> " + param);
 
 		LOGGER.debug("Command finished");
 		return new Router(RouteType.FORWARD, Path.PAGE_PROFILE);

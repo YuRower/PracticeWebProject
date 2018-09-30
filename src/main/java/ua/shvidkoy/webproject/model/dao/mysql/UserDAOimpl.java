@@ -45,7 +45,7 @@ public class UserDAOimpl implements UserDAO {
 			+ "password=?, id_role = ?, id_photo = ? WHERE user_id=?";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
 
-	private static final String SQL_INSERT_USER_SHORT_VARIANT ="INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
+	private static final String SQL_INSERT_USER_SHORT_VARIANT ="INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
 
 	@Override
 	public User selectEntityById(int id) throws MySqlException, ConnectionException {
@@ -146,7 +146,6 @@ public class UserDAOimpl implements UserDAO {
 			pstmt.setString(3, user.getLogin());
 			pstmt.setString(4, user.getPassword());
 			pstmt.setInt(5, user.getUserRoleId());
-			pstmt.setInt(6, user.getId());
 
 
 			if (pstmt.executeUpdate() > 0) {

@@ -29,7 +29,7 @@ public class LogoutCommand extends CommandStrategy {
 		}
 
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.REDIRECT, Path.INDEX);
+		return new Router(RouteType.FORWARD, Path.INDEX);
 	}
 
 }

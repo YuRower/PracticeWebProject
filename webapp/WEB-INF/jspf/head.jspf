@@ -48,40 +48,52 @@ This way we define the USER MENU.
 					<c:set var="title" value="Logout" />
 					<c:out value="${role.name}" /> 
 		user
-		<form>
-			<input type="hidden" name="command" value="redirect_profile" />
-						<input type="hidden" id="hiddenField" name="param" value="" />
+		<form id="myForm" method="post" action="front_controller">
+						<input type="hidden" name="command" value="redirect_profile" /> <input
+							type="hidden" id="hiddenField" name="param" value="" />
+
 						<script>
 							$(function() {
 								makeLink();
-								var currentUserID = $("#myTable #UserID").click(function(){
-							    	var currentUser=$(this).text();
-							    	return currentUser;
-								});
-								
+								$("#myTable #UserID")
+										.click(
+												function() {
+													var currentUser = $(this)
+															.text();
+													// alert(currentUser);<c:set var="tmp" value="blabla" />
+
+													//var value = "${tmp}";
+													alert(currentUser);
+													document
+															.getElementById('hiddenField').value = currentUser;
+													document.getElementById(
+															"myForm").submit();
+
+													//return currentUser;
+												});
+								//alert(userID.text());
 								$(".header").css("background-color", "orange");
 								$("footer").css("background-color", "orange");
+
 							});
 						</script>
 					</form>
-						
+
 
 
 				</c:when>
 			</c:choose>
 
-			
-					<%--=========================================================================== 
+
+			<%--=========================================================================== 
 This way we define the settings anchor.
 ===========================================================================--%>
-				
 
-		</div> 
-			<%--=========================================================================== 
+
+		</div> <%--=========================================================================== 
 This way we define the menu located at the right of header. 
 ===========================================================================--%>
-						
+
 	</td>
 </tr>
 
-					

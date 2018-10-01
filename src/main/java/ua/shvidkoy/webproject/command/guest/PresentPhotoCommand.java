@@ -34,8 +34,6 @@ public class PresentPhotoCommand extends CommandStrategy {
 
 		HttpSession session = request.getSession();
 
-
-
 		List<Photo> photos = guestLogic.loadPhoto();
 		session.setAttribute("photo", photos);
 		LOGGER.debug("Set the session attribute: photo --> " + photos);

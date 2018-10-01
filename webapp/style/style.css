@@ -60,12 +60,15 @@ button {
 }
 .button {
     background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
     border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
     cursor: pointer;
-    width: 100%;
 }
 
 button:hover {
@@ -90,6 +93,7 @@ img.avatar {
     width: 40%;
     border-radius: 50%;
 }
+
 
 .container {
     padding: 16px;

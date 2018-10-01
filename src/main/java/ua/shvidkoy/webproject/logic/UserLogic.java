@@ -15,8 +15,9 @@ public class UserLogic extends ApplicationLogic {
 
 	private static AbstractDAOFactory mysqlFactory = AbstractDAOFactory.getDAOFactory(FactoryTypes.MYSQL);
 	private static UserDAO userDao = mysqlFactory.getUserDAO();
+	private final static Logger LOGGER = Logger.getLogger(UserLogic.class);
 
-	public static long LoginUser(User user, String login) throws MySqlException, ConnectionException {
+	public  long LoginUser(User user, String login) throws MySqlException, ConnectionException {
 		// user.setPassword(EncryptUtil.encryptString(user.getPassword()));
 		TransactionManager.beginTransaction();
 		// long photoId = PhotoDao.insert(user.getPhoto());
@@ -31,7 +32,25 @@ public class UserLogic extends ApplicationLogic {
 			throw e;
 
 		}
+
 		// long userId = userDao.addEntity(user);
+
+	}
+
+	public  User getUserByID(int id) throws MySqlException, ConnectionException {
+		//TransactionManager.beginTransaction();
+		// long photoId = PhotoDao.insert(user.getPhoto());
+		// user.getPhoto().setId(photoId);
+		try {
+			User user = userDao.selectEntityById(id);
+			//TransactionManager.commitTransaction();
+			return user;
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+			TransactionManager.rollbackTransaction();
+			throw e;
+
+		}
 
 	}
 

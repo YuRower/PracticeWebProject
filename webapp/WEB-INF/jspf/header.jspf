@@ -5,53 +5,46 @@
 
 <title>${title}</title>
 
-<%--=========================================================================== 
-Bind CSS document. <link rel="stylesheet" type="text/css" media="screen" href="style/st4.css"/>
-===========================================================================--%>
 <link rel="stylesheet" type="text/css" media="screen"
 	href="style/style.css" />
-<!-- REQUIRED SCRIPTS FILES -->
-<!-- CORE JQUERY FILE -->
 <script src="js/jquery-1.js"></script>
-<!-- REQUIRED BOOTSTRAP SCRIPTS -->
 <script src="js/bootstrap.js"></script>
-<script src="js/close.js"></script>
+<script src="js/main.js"></script>
 
-
-<%--=========================================================================== 
-If you define http-equiv attribute, set the content type and the charset the same
-as you set them in a page directive. <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-===========================================================================--%>
 <meta charset="UTF-8">
 </head>
-
 <body>
 	<c:choose>
-	
-		<c:when test="${ roleId eq 'user' }">
-User is user
-<c:set var="title" value="Log out" />
-
+		<c:when test="${ role.name eq 'user' }">
+			<c:set var="title" value="Logout" />
 			<br />
 		</c:when>
-		<c:when test="${ roleId eq 'guest' }">
-			<c:set var="title" value="Log in " />
+		<c:when test="${ role.name eq 'guest' }">
+			<c:set var="title" value="Login" />
+			<br />
+		</c:when>
+		<c:when test="${ role.name eq 'admin' }">
+			<c:set var="title" value="Logout" />
 			<br />
 		</c:when>
 		<c:otherwise>
-			<c:set var="title" value="Logout" />
-			<br />
+			<c:out value="${role.name}" />
 		</c:otherwise>
 	</c:choose>
-
-
+	
 	<div class="header">
 		<div id="id00">
-			<button onclick="displayModalWindow()" style="width: auto;">${title}</button>
+			<c:if test="${ title eq 'Logout'}">
+				<button onclick="location.href='front_controller?command=logout';"
+					style="width: auto;" value="Logout">
+					<c:out value="${title}" />
+				</button>
+			</c:if>
+			<c:if test="${ title eq 'Login'}">
+				<button onclick="displayModalWindow()" style="width: auto;">
+					<c:out value="${title}" />
+				</button>
+			</c:if>
 		</div>
-
 	</div>
-
-
-
 </body>

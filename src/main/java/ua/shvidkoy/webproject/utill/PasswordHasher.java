@@ -1,22 +1,10 @@
 package ua.shvidkoy.webproject.utill;
 
-
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-/**
- * Class allows to hash user password 
- * and compare pain password with hash 
- * using BCrypt algorithm.
- * 
- * @author yaroslav
- *
- */
 public class PasswordHasher {
-	
-	/**
-	 * Priavte constructor
-	 */
-	private PasswordHasher () {}
+	private PasswordHasher() {
+	}
 
 	public static String getHash(String plainPassword) {
 		return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
@@ -25,9 +13,8 @@ public class PasswordHasher {
 	public static boolean checkPassword(String candidatePassword, String hash) {
 		return BCrypt.checkpw(candidatePassword, hash);
 	}
-	
-	//TODO test this
-	public static void main (String[] args) {
+
+	public static void main(String[] args) {
 		String password = "password";
 		String hash = getHash(password);
 		System.out.println(hash + " " + hash.length());

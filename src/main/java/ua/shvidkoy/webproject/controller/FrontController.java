@@ -15,15 +15,10 @@ import org.apache.log4j.Logger;
 
 import ua.shvidkoy.webproject.command.CommandContainer;
 import ua.shvidkoy.webproject.command.CommandStrategy;
-import ua.shvidkoy.webproject.command.user.UserListCommand;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
-import ua.shvidkoy.webproject.exception.ConnectionException;
-import ua.shvidkoy.webproject.exception.LogicException;
-import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
-import ua.shvidkoy.webproject.model.entity.User;
 
 public class FrontController extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
@@ -56,12 +51,7 @@ public class FrontController extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		LOGGER.debug("Controller starts");
-	/*	try {
-			new UserListCommand(new GuestLogic()).execute(request, response);
-		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 		LOGGER.debug(request.getParameter("command"));
 
 		String commandName = request.getParameter("command");

@@ -9,6 +9,8 @@
 <meta charset="utf-8">
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 <title>user profile</title>
+<c:set var="user_profile" value="${userProfile} " />
+
 <body class="">
 
 	<div class="container">
@@ -19,32 +21,33 @@
 						<div class="alert alert-info">
 							<h2>User Profile :</h2>
 						</div>
-						<input type="hidden" name="command" value="update_user" />
-							<input type="hidden" name="action" value="User addition" />
-							
+						<input type="hidden" name="command" value="update_user" /> <input
+							type="hidden" name="action" value="User addition" />
+
 						<div class="form-group col-md-8">
-							<br> <br> <label>First Name</label> 
-							<input class="form-control" name="First Name" placeholder="First Name"
-								required type="text"> <label>Last Name</label> 
-								<input class="form-control" name="Last Name" placeholder="Last Name"
-								required type="text"> <label>login</label> 
-								<input class="form-control" name="Login" placeholder="Login" required
-								type="text"> <label>Role</label> 
-								<input class="form-control" name="Role" placeholder="Role" required
-								type="text"> <br>
+							<br> <br> <label>First Name</label> <input
+								class="form-control" name="First Name" placeholder="First Name"
+								required type="text" value="${userProfile.firstName} "> <label>Last Name</label> <input
+								class="form-control" name="Last Name" placeholder="Last Name"
+								required type="text"value="${userProfile.lastName}"> <label>login</label> <input
+								class="form-control" name="Login" placeholder="Login" required
+								type="text" value="${userProfile.login}"> <label>Role</label> <input
+								class="form-control" name="Role" placeholder="Role" required
+								type="text"value="${userProfile.userRoleId}"> <br>
 							<button type="submit" value="Add User" class="btn btn-success">Update
 								Details</button>
 							<br> <br>
 						</div>
 					</div>
 					<div class="col-md-5">
-						 <form action="">
-							<input type="file" name="pic" accept="image/*">
-							<img src="img/${photo.name}" alt="not found"
-										style="width: 128px; height: 128px;" />
-										   <input type="submit" value="Send"></p>
+						<form action="">
+							<input type="file" name="pic" accept="image/*"> <img
+								src="img/${photo.name}" alt="not found"
+								style="width: 128px; height: 128px;" /> <input type="submit"
+								value="Send">
+							</p>
 						</form>
-						
+
 						<div class="form-group col-md-8">
 							<h3>Change Your Password</h3>
 							<br> <label>Enter Old Password</label> <input
@@ -53,7 +56,7 @@
 								class="form-control" name="new_password" type="password"
 								required> <label>Confirm New Password</label> <input
 								class="form-control" name="confirmed_password" type="password"
-								required> <br> <a href="#" class="btn btn-warning">Change
+								required value = "${userProfile.userRoleId}"> <br> <a href="#" class="btn btn-warning">Change
 								Password</a>
 						</div>
 					</div>

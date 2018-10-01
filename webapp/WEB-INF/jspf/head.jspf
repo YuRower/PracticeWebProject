@@ -10,39 +10,23 @@ Header (top area).
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <tr>
 	<td id="header">
-		<%--=========================================================================== 
-This is the user menu. 
-===========================================================================--%>
-
 		<div id="leftHeader">
-
 			<c:choose>
-
-				<%--=========================================================================== 
-This way we define the ADMIN MENU. 
-===========================================================================--%>
-
 				<c:when test="${role.name == 'guest' }">
 					<div class="text-center"></div>
 				</c:when>
 				<c:when test="${role.name == 'admin' }">
 					<c:set var="roleId" value="admin" />
 					<c:set var="title" value="Logout" />
-					
 		admin
 		<script>
 			$(function() {
-
 				$(".header").css("background-color", "green");
 				$("footer").css("background-color", "green");
 			});
 		</script>
 				</c:when>
 
-
-				<%--=========================================================================== 
-This way we define the USER MENU.
-===========================================================================--%>
 				<c:when test="${role.name == 'user'}">
 					<c:set var="roleId" value="user" />
 					<c:set var="title" value="Logout" />
@@ -51,49 +35,26 @@ This way we define the USER MENU.
 		<form id="myForm" method="post" action="front_controller">
 						<input type="hidden" name="command" value="redirect_profile" /> <input
 							type="hidden" id="hiddenField" name="param" value="" />
-
 						<script>
 							$(function() {
 								makeLink();
 								$("#myTable #UserID")
 										.click(
 												function() {
-													var currentUser = $(this)
-															.text();
-													// alert(currentUser);<c:set var="tmp" value="blabla" />
+													var currentUser = $(this).text();
 
-													//var value = "${tmp}";
-													alert(currentUser);
-													document
-															.getElementById('hiddenField').value = currentUser;
-													document.getElementById(
-															"myForm").submit();
-
-													//return currentUser;
+													//alert(currentUser);
+													document.getElementById('hiddenField').value = currentUser;
+													document.getElementById("myForm").submit();
 												});
-								//alert(userID.text());
 								$(".header").css("background-color", "orange");
 								$("footer").css("background-color", "orange");
-
 							});
 						</script>
 					</form>
-
-
-
 				</c:when>
 			</c:choose>
-
-
-			<%--=========================================================================== 
-This way we define the settings anchor.
-===========================================================================--%>
-
-
-		</div> <%--=========================================================================== 
-This way we define the menu located at the right of header. 
-===========================================================================--%>
-
+		</div>
 	</td>
 </tr>
 

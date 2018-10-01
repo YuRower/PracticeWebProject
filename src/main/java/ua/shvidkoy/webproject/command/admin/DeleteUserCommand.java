@@ -15,7 +15,6 @@ import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.AdminLogic;
-import ua.shvidkoy.webproject.model.entity.User;
 
 public class DeleteUserCommand extends CommandStrategy {
 	private static final Logger LOGGER = Logger.getLogger(DeleteUserCommand.class);
@@ -52,6 +51,6 @@ public class DeleteUserCommand extends CommandStrategy {
 
 	private void deleteAdminById(int userId) throws ApplicationException {
 		adminLogic.getEntityById(userId);
-		LOGGER.info("Admin that will be deleted --> " + userId);
+		LOGGER.info("Admin will deleted --> " + userId);
 	}
 }

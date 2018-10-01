@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.admin.RedirectToProfileCommand;
+import ua.shvidkoy.webproject.command.user.RedirectToProfileCommand;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.user.RedirectToProfileCommand;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
@@ -56,12 +57,13 @@ public class AddUserCommand extends CommandStrategy {
 		confirmed_password = PasswordHasher.getHash(confirmed_password);
 		LOGGER.info("Request parameter: password --> " + confirmed_password);
 		User user = new User(firstName,lastName,login,roleId,confirmed_password);
-		LOGGER.trace("Created user --> " + user);
+		LOGGER.info("Created user --> " + user);
 		adminLogic.newUserWithDefaultValues(user);
 
 		LOGGER.debug("Command finished");
 		return new Router(RouteType.FORWARD, Path.PAGE_COMPLETED_ADDITION);
 	}
+	
 	private int getRoleId(HttpServletRequest request) {
 		String userId = request.getParameter("Role");
 		LOGGER.trace("Role id --> " + userId);

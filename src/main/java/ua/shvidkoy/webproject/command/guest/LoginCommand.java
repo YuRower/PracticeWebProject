@@ -64,23 +64,6 @@ public class LoginCommand extends CommandStrategy {
 		Role role = Role.getRole(user);
 		LOGGER.info("userRole --> " + role);
 
-		String forward;
-
-		switch (role) {
-		case ADMIN:
-			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
-			break;
-		case USER:
-			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
-			break;
-		case GUEST:
-			// forward = Path.COMMAND_LIST_ADMINS;
-			forward = Path.COMMAND_INITIALIZE_USER_SESSION;
-
-			break;
-		default:
-			throw new ApplicationException("Unresolved usertype");
-		}
 
 		session.setAttribute("user", user);
 		LOGGER.info("Set the session attribute: user --> " + user);
@@ -91,7 +74,7 @@ public class LoginCommand extends CommandStrategy {
 		LOGGER.info("User " + user + " logged as " + role.toString().toLowerCase());
 
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.REDIRECT, forward);
+		return new Router(RouteType.REDIRECT, Path.COMMAND_INITIALIZE_USER_SESSION);
 	}
 
 }

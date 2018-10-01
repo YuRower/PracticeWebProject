@@ -52,23 +52,14 @@ public class UserListCommand extends CommandStrategy {
 		session.setAttribute("photos", photos);
 		LOGGER.debug("Set the session attribute: photo --> " + photos);
 		LOGGER.debug("Command finished");
-
-		 
-		//Role role = Role.getRole();
-		//LOGGER.info("role --> " + role);
-		
+	
 		session.setAttribute("users", users);
-
 		LOGGER.debug("Set the session attribute: users --> " + users);
-		//session.setAttribute("role", role);
-	//	LOGGER.info("Set the session attribute: userRole--> " + role);
-
+		
 		LOGGER.debug("Command finished");
-		// String forward = Path.COMMAND_INITIALIZE_USER;
 
 		return new Router(RouteType.FORWARD, Path.PAGE_START);
 
-		// return new Router(RouteType.REDIRECT, forward);
 	}
 
 }

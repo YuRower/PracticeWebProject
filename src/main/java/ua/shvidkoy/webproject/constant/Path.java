@@ -18,6 +18,7 @@ public class Path {
 		// commands
 	 public static final String COMMAND_REDIRECT_TO_USERPROFILE = "front_controller?command=redirect_profile";
 		public static final String COMMAND_INITIALIZE_USER_SESSION= "front_controller?command=init_user_list";
+		 public static final String COMMAND_REDIRECT_AFTER_ACTION = "front_controller?command=redirect_after_action";
 
 	
 

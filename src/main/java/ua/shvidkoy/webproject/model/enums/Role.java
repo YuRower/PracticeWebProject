@@ -2,8 +2,7 @@ package ua.shvidkoy.webproject.model.enums;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.controller.FrontController;
-import ua.shvidkoy.webproject.exception.Messages;
+
 import ua.shvidkoy.webproject.model.entity.User;
 
 public enum Role {

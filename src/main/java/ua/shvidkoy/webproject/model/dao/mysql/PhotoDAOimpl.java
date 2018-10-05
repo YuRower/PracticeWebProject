@@ -17,7 +17,9 @@ import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
 
 public class PhotoDAOimpl implements PhotoDAO {
-	private static final String SQL_FIND_PHOTO_BY_ID = "SELECT * FROM photo";
+	private static final String SQL_FIND_PHOTO_BY_ID = "SELECT * FROM photo WHERE id = ? ";
+	private static final String SQL_FIND_PHOTO = "SELECT * FROM photo";
+
 	private MysqlDAOFactory factory;
 	private final static Logger LOGGER = Logger.getLogger(PhotoDAOimpl.class);
 	public static final String PHOTO_ID = "id";
@@ -34,7 +36,7 @@ public class PhotoDAOimpl implements PhotoDAO {
 		ProxyConnection con = null;
 		try {
 			con = factory.getProxyConnection();
-			pstmt = con.prepareStatement(SQL_FIND_PHOTO_BY_ID);
+			pstmt = con.prepareStatement(SQL_FIND_PHOTO);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				result.add(extractPhoto(rs));
@@ -55,6 +57,7 @@ public class PhotoDAOimpl implements PhotoDAO {
 		Photo photo = new Photo();
 		photo.setId(rs.getInt(PHOTO_ID));
 		photo.setName(rs.getString(PHOTO_NAME));
+		
 		LOGGER.info(photo.toString());
 		return photo;
 	}
@@ -76,8 +79,27 @@ public class PhotoDAOimpl implements PhotoDAO {
 
 	@Override
 	public Photo selectEntityById(int id) throws MySqlException, ConnectionException {
-		// TODO Auto-generated method stub
-		return null;
+		Photo photo = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProxyConnection con = null;
+		try {
+			con = factory.getProxyConnection();
+			pstmt = con.prepareStatement(SQL_FIND_PHOTO_BY_ID);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				photo = extractPhoto(rs);
+			}
+			//con.commit();
+		} catch (SQLException ex) {
+		//	factory.rollback(con);
+			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+		} finally {
+			factory.close(con, pstmt, rs);
+		}
+		return photo;
 	}
 
 }

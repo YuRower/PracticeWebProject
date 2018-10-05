@@ -51,19 +51,15 @@ public class LoginCommand extends CommandStrategy {
 
 		User user = guestLogic.findUserByLogin(login);
 		LOGGER.info("Found in DB: user --> " + user);
-		//password = PasswordHasher.getHash(password);
-		/*String checkpassword = PasswordHasher.getHash("123");
-		LOGGER.info("Found in DB: user --> " + checkpassword);*/
 
-		/*if (user == null || !PasswordHasher.checkPassword(password, user.getPassword())) {
+		if (user == null || !PasswordHasher.checkPassword(password, user.getPassword())) {
 			throw new ApplicationException("Cannot find user with such login/password");
-		}*/
+		}
 
 		LOGGER.info("userRole --> " + user);
 
 		Role role = Role.getRole(user);
 		LOGGER.info("userRole --> " + role);
-
 
 		session.setAttribute("user", user);
 		LOGGER.info("Set the session attribute: user --> " + user);

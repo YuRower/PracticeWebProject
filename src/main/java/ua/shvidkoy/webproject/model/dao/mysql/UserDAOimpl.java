@@ -42,7 +42,7 @@ public class UserDAOimpl implements UserDAO {
 
 	private static final String SQL_INSERT_USER_FULL_INFO = "INSERT INTO user VALUES (DEFAULT,?, ?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?, last_name = ?, login = ?, "
-			+ "password=?, id_role = ?, id_photo = ? WHERE user_id=?";
+			+ "password=?, id_role = ? WHERE id_user=?";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
 
 	private static final String SQL_INSERT_USER_SHORT_VARIANT ="INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
@@ -85,8 +85,7 @@ public class UserDAOimpl implements UserDAO {
 			pstmt.setString(3, entity.getLogin());
 			pstmt.setString(4, entity.getPassword());
 			pstmt.setInt(5, entity.getUserRoleId());
-			pstmt.setInt(6, entity.getUserPhotoId());
-			pstmt.setInt(7, entity.getId());
+			pstmt.setInt(6, entity.getId());
 			result = pstmt.executeUpdate() > 0;
 			//con.commit();
 		} catch (SQLException ex) {

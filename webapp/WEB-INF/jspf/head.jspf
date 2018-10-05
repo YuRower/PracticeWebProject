@@ -7,7 +7,9 @@ Header (top area).
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 <script src="js/jquery-1.js"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.7/bootstrap-confirmation.js" >
+</script>
 <tr>
 	<td id="header">
 		<div id="leftHeader">
@@ -19,12 +21,30 @@ Header (top area).
 					<c:set var="roleId" value="admin" />
 					<c:set var="title" value="Logout" />
 		admin
-		<script>
-			$(function() {
-				$(".header").css("background-color", "green");
-				$("footer").css("background-color", "green");
-			});
-		</script>
+		<form id="myForm" method="post" action="front_controller">
+						<input type="hidden" name="command" value="redirect_profile" /> <input
+							type="hidden" id="hiddenField" name="param" value="" />
+						<script>
+							$(function() {
+								makeLink();
+								$("#myTable #UserID")
+										.click(
+												function() {
+													var currentUser = $(this)
+															.text();
+
+													//alert(currentUser);
+													document
+															.getElementById('hiddenField').value = currentUser;
+													document.getElementById(
+															"myForm").submit();
+												});
+								$(".header").css("background-color", "green");
+								$("footer").css("background-color", "green");
+							});
+						</script>
+					</form>
+
 				</c:when>
 
 				<c:when test="${role.name == 'user'}">
@@ -41,11 +61,14 @@ Header (top area).
 								$("#myTable #UserID")
 										.click(
 												function() {
-													var currentUser = $(this).text();
+													var currentUser = $(this)
+															.text();
 
 													//alert(currentUser);
-													document.getElementById('hiddenField').value = currentUser;
-													document.getElementById("myForm").submit();
+													document
+															.getElementById('hiddenField').value = currentUser;
+													document.getElementById(
+															"myForm").submit();
 												});
 								$(".header").css("background-color", "orange");
 								$("footer").css("background-color", "orange");

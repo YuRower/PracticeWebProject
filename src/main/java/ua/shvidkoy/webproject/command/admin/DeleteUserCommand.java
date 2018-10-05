@@ -39,7 +39,7 @@ public class DeleteUserCommand extends CommandStrategy {
 		session.setAttribute("action", action);
 		
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.FORWARD, Path.PAGE_COMPLETED_ADDITION);
+		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_AFTER_ACTION);
 }
 	
 

@@ -20,7 +20,6 @@ Header (top area).
 				<c:when test="${role.name == 'admin' }">
 					<c:set var="roleId" value="admin" />
 					<c:set var="title" value="Logout" />
-		admin
 		<form id="myForm" method="post" action="front_controller">
 						<input type="hidden" name="command" value="redirect_profile" /> <input
 							type="hidden" id="hiddenField" name="param" value="" />
@@ -30,12 +29,8 @@ Header (top area).
 								$("#myTable #UserID")
 										.click(
 												function() {
-													var currentUser = $(this)
-															.text();
-
-													//alert(currentUser);
-													document
-															.getElementById('hiddenField').value = currentUser;
+													var currentUser = $(this).text();
+													document.getElementById('hiddenField').value = currentUser;
 													document.getElementById(
 															"myForm").submit();
 												});
@@ -44,14 +39,11 @@ Header (top area).
 							});
 						</script>
 					</form>
-
 				</c:when>
-
 				<c:when test="${role.name == 'user'}">
 					<c:set var="roleId" value="user" />
 					<c:set var="title" value="Logout" />
 					<c:out value="${role.name}" /> 
-		user
 		<form id="myForm" method="post" action="front_controller">
 						<input type="hidden" name="command" value="redirect_profile" /> <input
 							type="hidden" id="hiddenField" name="param" value="" />
@@ -61,14 +53,9 @@ Header (top area).
 								$("#myTable #UserID")
 										.click(
 												function() {
-													var currentUser = $(this)
-															.text();
-
-													//alert(currentUser);
-													document
-															.getElementById('hiddenField').value = currentUser;
-													document.getElementById(
-															"myForm").submit();
+													var currentUser = $(this).text();
+													document.getElementById('hiddenField').value = currentUser;
+													document.getElementById("myForm").submit();
 												});
 								$(".header").css("background-color", "orange");
 								$("footer").css("background-color", "orange");

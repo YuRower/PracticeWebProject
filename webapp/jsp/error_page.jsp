@@ -4,15 +4,10 @@
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
-
-<c:set var="title" value="Error" scope="page" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
-	
 <body>
 
 	<table id="main-container">
 
-		<%@ include file="/WEB-INF/jspf/header.jspf"%>
 
 		<tr >
 			<td class="content center">

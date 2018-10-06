@@ -43,9 +43,10 @@ public class UserDAOimpl implements UserDAO {
 	private static final String SQL_INSERT_USER_FULL_INFO = "INSERT INTO user VALUES (DEFAULT,?, ?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?, last_name = ?, login = ?, "
 			+ "password=?, id_role = ? WHERE id_user=?";
+	private static final String SQL_UPDATE_USER_PHOTO = "UPDATE user SET id_photo= ? WHERE id_user=?";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
 
-	private static final String SQL_INSERT_USER_SHORT_VARIANT ="INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
+	private static final String SQL_INSERT_USER_SHORT_VARIANT = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
 
 	@Override
 	public User selectEntityById(int id) throws MySqlException, ConnectionException {
@@ -61,9 +62,9 @@ public class UserDAOimpl implements UserDAO {
 			if (rs.next()) {
 				user = extractUser(rs);
 			}
-			//con.commit();
+			// con.commit();
 		} catch (SQLException ex) {
-		//	factory.rollback(con);
+			// factory.rollback(con);
 			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
 			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
 		} finally {
@@ -87,9 +88,32 @@ public class UserDAOimpl implements UserDAO {
 			pstmt.setInt(5, entity.getUserRoleId());
 			pstmt.setInt(6, entity.getId());
 			result = pstmt.executeUpdate() > 0;
-			//con.commit();
+			// con.commit();
 		} catch (SQLException ex) {
-			//factory.rollback(con);
+			// factory.rollback(con);
+			LOGGER.error(Messages.ERR_CANNOT_UPDATE_USER, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_UPDATE_USER, ex);
+		} finally {
+			factory.close(con);
+			factory.close(pstmt);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updatePhoto(User entity) throws MySqlException, ConnectionException {
+		boolean result;
+		PreparedStatement pstmt = null;
+		ProxyConnection con = null;
+		try {
+			con = factory.getProxyConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE_USER_PHOTO);
+			pstmt.setInt(1, entity.getUserPhotoId());
+			pstmt.setInt(2, entity.getId());
+			result = pstmt.executeUpdate() > 0;
+			// con.commit();
+		} catch (SQLException ex) {
+			// factory.rollback(con);
 			LOGGER.error(Messages.ERR_CANNOT_UPDATE_USER, ex);
 			throw new MySqlException(Messages.ERR_CANNOT_UPDATE_USER, ex);
 		} finally {
@@ -121,9 +145,9 @@ public class UserDAOimpl implements UserDAO {
 					result = true;
 				}
 			}
-			//con.commit();
+			// con.commit();
 		} catch (SQLException ex) {
-			//factory.rollback(con);
+			// factory.rollback(con);
 			LOGGER.error(Messages.ERR_CANNOT_INSERT_USER, ex);
 			throw new MySqlException(Messages.ERR_CANNOT_INSERT_USER, ex);
 		} finally {
@@ -131,6 +155,7 @@ public class UserDAOimpl implements UserDAO {
 		}
 		return result;
 	}
+
 	@Override
 	public boolean newUserWithDefaultValues(User user) throws MySqlException, ConnectionException {
 		boolean result = false;
@@ -146,7 +171,6 @@ public class UserDAOimpl implements UserDAO {
 			pstmt.setString(4, user.getPassword());
 			pstmt.setInt(5, user.getUserRoleId());
 
-
 			if (pstmt.executeUpdate() > 0) {
 				rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {
@@ -161,7 +185,8 @@ public class UserDAOimpl implements UserDAO {
 			factory.close(con, pstmt, rs);
 		}
 		return result;
-}
+	}
+
 	@Override
 	public boolean removeEntity(User entity) throws MySqlException, ConnectionException {
 		boolean result = false;
@@ -173,11 +198,11 @@ public class UserDAOimpl implements UserDAO {
 			pstmt = con.prepareStatement(SQL_REMOVE_ADMIN);
 			pstmt.setInt(1, entity.getId());
 			result = pstmt.executeUpdate() > 0;
-			//con.commit();
+			// con.commit();
 		} catch (SQLException ex) {
-		//	factory.rollback(con);
-			LOGGER.error(Messages.ERR_CANNOT_DELETE_ADMIN, ex);
-			throw new MySqlException(Messages.ERR_CANNOT_DELETE_ADMIN, ex);
+			// factory.rollback(con);
+			LOGGER.error(Messages.ERR_CANNOT_DELETE_USER, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_DELETE_USER, ex);
 		} finally {
 			factory.close(con, pstmt, rs);
 		}
@@ -210,9 +235,9 @@ public class UserDAOimpl implements UserDAO {
 			if (rs.next()) {
 				user = extractUser(rs);
 			}
-		//	con.commit();
+			// con.commit();
 		} catch (SQLException ex) {
-		//	factory.rollback(con);
+			// factory.rollback(con);
 			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_LOGIN, ex);
 			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_USER_BY_LOGIN, ex);
 		} finally {
@@ -249,11 +274,11 @@ public class UserDAOimpl implements UserDAO {
 			while (rs.next()) {
 				result.add(extractUser(rs));
 			}
-		//	con.commit();
+			// con.commit();
 		} catch (SQLException ex) {
-			//factory.rollback(con);
-			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_ADMINS, ex);
-			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_ADMINS, ex);
+			// factory.rollback(con);
+			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_USER_LIST, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_USER_LIST, ex);
 		} finally {
 			factory.close(con, stmt, rs);
 		}

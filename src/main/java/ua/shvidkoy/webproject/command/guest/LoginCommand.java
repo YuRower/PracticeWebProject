@@ -19,9 +19,7 @@ import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.User;
 import ua.shvidkoy.webproject.model.enums.Role;
 import ua.shvidkoy.webproject.utill.PasswordHasher;
-import ua.shvidkoy.webproject.utill.PasswordHasher1;
-import ua.shvidkoy.webproject.utill.PasswordHasher1.CannotPerformOperationException;
-import ua.shvidkoy.webproject.utill.PasswordHasher1.InvalidHashException;
+
 
 public class LoginCommand extends CommandStrategy {
 	private GuestLogic guestLogic;

@@ -42,22 +42,22 @@
 							<br>
 
 							<c:if test="${role.name == 'admin' }">
-								<button type="submit" value="Add User" class="btn btn-success">Add
+								<button type="submit" onclick="addUserFunc()" value="Add User"
+									class="btn btn-success">Add Details</button>
+
+								<br>
+								<button type="submit" onclick="updateUserFunc()"
+									value="Update User" class="btn btn-success">Update
 									Details</button>
 								<script>
-									$(function() {
+									function addUserFunc() {
 										document.getElementById("add_update").value = "add_user";
 
-									});
-								</script>
-								<br>
-								<button type="submit" value="Update User"
-									class="btn btn-success">Update Details</button>
-								<script>
-									$(function() {
+									}
+									function updateUserFunc() {
 										document.getElementById("add_update").value = "update_user";
 
-									});
+									}
 								</script>
 								<br>
 							</c:if>
@@ -84,30 +84,35 @@
 							<c:when test="${ not empty userPhoto.name}">
 								<div class="img1">
 									<img src="img/${userPhoto.name}" alt="not found"
+										<c:out value="${userPhoto.name}" />
 										style="width: 128px; height: 128px;" />
 								</div>
 							</c:when>
-							<c:otherwise>
+							<c:otherwise>							
 								<img src="img/img_avatar.png" alt="not found"
 									style="width: 128px; height: 128px;" />
 							</c:otherwise>
-
 						</c:choose>
-
+						
 						<c:if test="${userProfile.id eq registered_user}">
-							<!-- <input id="user_load_photo" type="hidden" id="update_photo"
-								name="command" value="" /> -->
 							<br>
 							<input type="file" name="pic" accept="img/*" value=""
 								form="photo_form">
 							<script>
-								/*$(function() {
-									var photo = $('.img1 img').attr('src');
-									alert(photo)
-									document.getElementById("user_load_photo").value = photo;
-
-								});*/
+								$('#photo_form')
+										.submit(
+												function() {
+													var photo = $('.img1 img')
+															.attr('src');
+													alert(photo)
+													document
+															.getElementById("user_load_photo").value = photo;
+												});
 							</script>
+				
+							<input type="hidden" name="command" value="update_photo" form="photo_form">
+							<input type="hidden" name="user_photo_id" value="${userProfile.id}"  form="photo_form" />
+							<input type="hidden" name="action" value="Photo updated"  form="photo_form" />
 							<input type="submit" value="Update Photo" form="photo_form">
 
 						</c:if>

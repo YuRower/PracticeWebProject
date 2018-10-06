@@ -21,6 +21,10 @@ public class Photo extends AbstractEntity {
 
 	}
 
+	public Photo(String photoName) {
+		this.name = photoName;
+	}
+
 	public String getName() {
 		return name;
 	}

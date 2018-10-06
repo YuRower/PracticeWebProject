@@ -47,6 +47,12 @@ public class UserLogic extends ApplicationLogic {
 
 	}
 
+	public boolean updatePhoto(Photo photo) throws MySqlException, ConnectionException {
+		boolean updated = photoDao.update(photo);
+		return updated;
+
+	}
+
 	public User getUserByID(int id) throws MySqlException, ConnectionException {
 		// TransactionManager.beginTransaction();
 		// long photoId = PhotoDao.insert(user.getPhoto());
@@ -64,9 +70,20 @@ public class UserLogic extends ApplicationLogic {
 
 	}
 
+	public boolean insertPhoto(Photo photo) throws MySqlException, ConnectionException {
+		// TODO Auto-generated method stub
+		return photoDao.addEntity(photo);
+	}
+
 	public Photo loadPhotoById(int id) throws MySqlException, ConnectionException {
 		// TODO Auto-generated method stub
 		return photoDao.selectEntityById(id);
+	}
+
+	public void insertPhotoToUser(int id) throws MySqlException, ConnectionException {
+		User user = getUserByID(id);
+		user.setUserPhotoId(id);
+		userDao.updatePhoto(user);
 	}
 
 }

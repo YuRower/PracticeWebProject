@@ -49,8 +49,7 @@ public class RedirectToProfileCommand extends CommandStrategy {
 		}
 
 		LOGGER.debug("Command finished");
-
-		return new Router(RouteType.FORWARD, Path.PAGE_PROFILE);
+		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_PROFILE);
 	}
 
 	private int getUserId(HttpServletRequest request) {

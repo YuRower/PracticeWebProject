@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
 <html>
+
+
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Bootstrap Confirmation 3 Plugin Demos</title>
@@ -10,16 +11,18 @@
 <link href="../style/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+	<%@ include file="/WEB-INF/jspf/head.jspf"%>
+	<%@ include file="/WEB-INF/jspf/header.jspf"%>
 	<div class="container" style="margin-top: 150px;">
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Default options with data toggle</h2>
-				<button class="btn btn-danger" data-toggle="confirmation">Click
-					me</button>
+				<button type="submit" class="demo"
+										data-toggle="confirmation" 
+										style="color: White; background-color: #d9534f; width: 50%;">
+										Delete</button>
 			</div>
 		</div>
-
 
 	</div>
 
@@ -29,10 +32,13 @@
 
 	<script>
 		$(function() {
-			$('body').confirmation({
-				selector : '[data-toggle="confirmation"]'
-			});
-
+			$('.demo').confirmation({
+				  onConfirm: function() {
+					  alert("hi");
+				  }
+					  
+					 
+					});
 		});
 	</script>
 </html>

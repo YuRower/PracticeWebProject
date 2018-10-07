@@ -86,4 +86,8 @@ public class UserLogic extends ApplicationLogic {
 		userDao.updatePhoto(user);
 	}
 
+	public void updatePassword(User user) throws MySqlException, ConnectionException {
+		userDao.updatePassword(user);		
+	}
+
 }

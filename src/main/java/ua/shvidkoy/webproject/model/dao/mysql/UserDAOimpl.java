@@ -6,17 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
-import ua.shvidkoy.webproject.controller.FrontController;
 import ua.shvidkoy.webproject.exception.ConnectionException;
 import ua.shvidkoy.webproject.exception.Messages;
 import ua.shvidkoy.webproject.exception.MySqlException;
 import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
 import ua.shvidkoy.webproject.model.connectionpool.ProxyConnection;
 import ua.shvidkoy.webproject.model.dao.UserDAO;
-import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
 
 public class UserDAOimpl implements UserDAO {
@@ -35,8 +31,8 @@ public class UserDAOimpl implements UserDAO {
 	public static final String USER_PASSWORD = "password";
 	public static final String USER_ROLE_ID = "id_role";
 	public static final String USER_PHOTO_ID = "id_photo";
-	// SQL queries
-	private static final String SQL_REMOVE_ADMIN = "DELETE FROM user WHERE id_user=?";
+
+	private static final String SQL_REMOVE_USER = "DELETE FROM user WHERE id_user=?";
 	private static final String SQL_FIND_ALL_USER = "SELECT * FROM user";
 	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM user WHERE id_user=?";
 
@@ -44,8 +40,9 @@ public class UserDAOimpl implements UserDAO {
 	private static final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?, last_name = ?, login = ?, "
 			+ "password=?, id_role = ? WHERE id_user=?";
 	private static final String SQL_UPDATE_USER_PHOTO = "UPDATE user SET id_photo= ? WHERE id_user=?";
-	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
+	private static final String SQL_UPDATE_PASSWORD = "UPDATE user SET password= ? WHERE id_user=?";
 
+	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login=?";
 	private static final String SQL_INSERT_USER_SHORT_VARIANT = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)";
 
 	@Override
@@ -195,7 +192,7 @@ public class UserDAOimpl implements UserDAO {
 		ProxyConnection con = null;
 		try {
 			con = factory.getProxyConnection();
-			pstmt = con.prepareStatement(SQL_REMOVE_ADMIN);
+			pstmt = con.prepareStatement(SQL_REMOVE_USER);
 			pstmt.setInt(1, entity.getId());
 			result = pstmt.executeUpdate() > 0;
 			// con.commit();
@@ -281,6 +278,27 @@ public class UserDAOimpl implements UserDAO {
 			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_USER_LIST, ex);
 		} finally {
 			factory.close(con, stmt, rs);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updatePassword(User user) throws MySqlException, ConnectionException {
+		boolean result;
+		PreparedStatement pstmt = null;
+		ProxyConnection con = null;
+		try {
+			con = factory.getProxyConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE_PASSWORD);
+			pstmt.setString(1, user.getPassword());
+			pstmt.setInt(2, user.getId());
+			result = pstmt.executeUpdate() > 0;
+		} catch (SQLException ex) {
+			LOGGER.error(Messages.ERR_CANNOT_UPDATE_USER, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_UPDATE_USER, ex);
+		} finally {
+			factory.close(con);
+			factory.close(pstmt);
 		}
 		return result;
 	}

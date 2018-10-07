@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
+<link href="../style/bootstrap.min.css" rel="stylesheet">
 
 <head>
 <title>Web Practice</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+
 	<c:set var="registered_user" value="${user.id}" scope="session" />
-	<c:out value="${registered_user}" />
 	<!-- coding: ${ pageContext.request.characterEncoding }-->
 	<div id="id01" class="modal">
 		<form id="login_form" action="front_controller" method="post"
@@ -20,7 +21,7 @@
 				<span onclick="closeModalWindow()" class="close" title="Close Modal">&times;</span>
 				<img src="img/img_avatar.png" alt="Avatar" class="avatar">
 			</div>
-			
+
 			<div class="container">
 				<label for="login"><b>Username</b></label> <input type="text"
 					placeholder="Enter Login" name="login" required> <label
@@ -35,7 +36,7 @@
 					name="remember"> Remember me
 				</label>
 			</div>
-			
+
 			<div class="container" style="background-color: #f1f1f1">
 				<button type="button" onclick="closeModalWindow()" class="cancelbtn">Cancel</button>
 				<span class="password">Forgot <a href="#">password?</a></span>
@@ -93,11 +94,20 @@
 										<input type="hidden" name="command" value="delete_user" /> <input
 											type="hidden" name="action" value="User deleted" /> <input
 											type="hidden" name="userId" value="${user.id}" />
-										<button type="submit" data-toggle="modal"
-											data-target="#delete_confirm_modal"
+										<button type="submit" class="demo" data-toggle="confirmation"
 											style="color: White; background-color: #d9534f; width: 50%;">
 											Delete</button>
-									</form>
+									</form> <script>
+										<script>
+										$(function() {
+											$('.demo').confirmation({
+												onConfirm : function() {
+													alert("hi");
+												}
+
+											});
+										});
+									</script>
 								</td>
 							</c:if>
 					</c:forEach>
@@ -108,11 +118,16 @@
 		<script>
 			$('tr.headTable').append('<th colspan="5">Delete User</th>');
 		</script>
+		
 		<div class="container">
 			<a href="front_controller?command=redirect_profile" class="button">Add
 				User</a>
 		</div>
 	</c:if>
+	<script src="../js/jquery-1.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/bootstrap-confirmation.js"></script>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
+
 </body>
 </html>

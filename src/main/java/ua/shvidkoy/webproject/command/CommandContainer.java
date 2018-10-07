@@ -11,7 +11,9 @@ import ua.shvidkoy.webproject.command.admin.DeleteUserCommand;
 import ua.shvidkoy.webproject.command.admin.RedirectAfterAction;
 import ua.shvidkoy.webproject.command.guest.LoginCommand;
 import ua.shvidkoy.webproject.command.guest.PresentPhotoCommand;
+import ua.shvidkoy.webproject.command.user.ChangePasswordCommand;
 import ua.shvidkoy.webproject.command.user.LogoutCommand;
+import ua.shvidkoy.webproject.command.user.ProfileCommand;
 import ua.shvidkoy.webproject.command.user.RedirectToProfileCommand;
 import ua.shvidkoy.webproject.command.user.UpdatePhotoCommand;
 import ua.shvidkoy.webproject.command.user.UpdateUserCommand;
@@ -35,6 +37,9 @@ public class CommandContainer {
 		commands.put("commandNotFound", new NoCommand());
 		commands.put("redirect_profile", new RedirectToProfileCommand(new UserLogic()));
 		commands.put("add_user", new AddUserCommand(new AdminLogic()));
+		commands.put("profile", new ProfileCommand());
+		commands.put("change_password", new ChangePasswordCommand(new UserLogic()));
+
 		commands.put("delete_user", new DeleteUserCommand(new AdminLogic()));
 		commands.put("redirect_after_action", new RedirectAfterAction());
 		commands.put("update_photo", new UpdatePhotoCommand(new UserLogic()));

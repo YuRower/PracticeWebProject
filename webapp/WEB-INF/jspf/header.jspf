@@ -33,7 +33,6 @@
 			<c:out value="${role.name}" />
 		</c:otherwise>
 	</c:choose>
-	
 	<div class="header">
 		<div id="id00">
 			<c:if test="${ title eq 'Logout'}">

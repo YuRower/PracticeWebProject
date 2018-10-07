@@ -29,4 +29,10 @@ public class Messages {
 	public static final String ERR_CANNOT_DELETE_USER = "Cannot delete user";
 
 	public static final String ERR_CANNOT_OBTAIN_USER_LIST = "Cannot obtain user list";
+
+	public static final String ERR_CANNOT_OBTAIN_PHOTOS = "Cannot obtain photo list";
+
+	public static final String ERR_CANNOT_UPDATE_USER_PHOTO = "Cannot update user photo";
+
+	public static final String ERR_CANNOT_INSERT_USER_PHOTO = "Cannot insert user photo";
 }

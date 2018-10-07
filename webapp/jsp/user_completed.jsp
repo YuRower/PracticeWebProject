@@ -11,7 +11,7 @@
 	<table id="main container">
 		<tr>
 			<td class="content center">
-			<c:out value = "${action} completed" />
+			<c:out value = "${action} " />
 			</td>
 			</tr>
 	</table>

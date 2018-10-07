@@ -1,6 +1,7 @@
 package ua.shvidkoy.webproject.command.user;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.UserLogic;
+import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
 
 public class RedirectToProfileCommand extends CommandStrategy {
@@ -32,19 +34,27 @@ public class RedirectToProfileCommand extends CommandStrategy {
 
 		LOGGER.debug("Command starts");
 		LOGGER.trace("Redirecting to profile page");
-		int id =getUserId(request);
-		User user = userLogic.getUserByID(id);
-		LOGGER.info("selected user --> " + user);
-		session.setAttribute("userProfile", user);
-		LOGGER.debug("Set the session attribute: userProfile --> " + user);
+
+		if (request.getParameter("param") != null) {
+			int id = getUserId(request);
+
+			User user = userLogic.getUserByID(id);
+
+			LOGGER.info("selected user --> " + user);
+			session.setAttribute("userProfile", user);
+			LOGGER.debug("Set the session attribute: userProfile --> " + user);
+			Photo userPhoto = userLogic.loadPhotoById(id);
+			session.setAttribute("userPhoto", userPhoto);
+			LOGGER.debug("Set the session attribute: photo --> " + userPhoto);
+		}
 
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.FORWARD, Path.PAGE_PROFILE);
+		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_PROFILE);
 	}
 
 	private int getUserId(HttpServletRequest request) {
 		String userId = request.getParameter("param");
 		LOGGER.info("Request parameter: action --> " + userId);
 		return Integer.parseInt(userId);
-		}
+	}
 }

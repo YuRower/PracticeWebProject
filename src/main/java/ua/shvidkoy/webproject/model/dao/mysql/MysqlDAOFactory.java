@@ -26,17 +26,19 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 		return connection;
 
 	}
+
 	private static MysqlDAOFactory instance;
-	
+
 	public static synchronized MysqlDAOFactory getInstance() throws SQLException {
 		if (instance == null) {
 			instance = new MysqlDAOFactory();
 		}
 		return instance;
-}
+	}
+
 	private MysqlDAOFactory() {
 
-    }
+	}
 
 	@Override
 	public UserDAO getUserDAO() {
@@ -52,7 +54,7 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 	public UserToRoleDAO getUserToRoleDAO() {
 		return null;
 	}
-	
+
 	public void close(Connection con) {
 		if (con != null) {
 			try {
@@ -83,20 +85,10 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 		}
 	}
 
-	
 	public void close(ProxyConnection con, Statement stmt, ResultSet rs) {
 		close(rs);
 		close(stmt);
 		close(con);
-}
-	/*public void rollback(Connection con) {
-		if (con != null) {
-			try {
-				con.rollback();
-			} catch (SQLException ex) {
-				LOGGER.error("Cannot rollback transaction", ex);
-			}
-		}
-	}*/
+	}
 
 }

@@ -13,5 +13,9 @@ public interface UserDAO extends CrudDAO<User> {
 
 	List<User> findAll() throws MySqlException, ConnectionException;
 
-	boolean newUserWithDefaultValues(User user) throws  MySqlException, ConnectionException;;
+	boolean newUserWithDefaultValues(User user) throws  MySqlException, ConnectionException;
+
+	boolean updatePhoto(User entity) throws MySqlException, ConnectionException;
+
+	boolean updatePassword(User user) throws MySqlException, ConnectionException;
 }

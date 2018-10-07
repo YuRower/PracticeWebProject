@@ -26,16 +26,16 @@ public class AddUserCommand extends CommandStrategy {
 	public AddUserCommand(AdminLogic adminLogic) {
 		this.adminLogic = adminLogic;
 	}
-	
+
 	@Override
 	public Router execute(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException, ApplicationException {
 		LOGGER.debug("Command starts");
 		HttpSession session = request.getSession();
-		String firstName = request.getParameter("First Name");
+		String firstName = request.getParameter("FirstName");
 		LOGGER.info("Request parameter: first name --> " + firstName);
 
-		String lastName = request.getParameter("Last Name");
+		String lastName = request.getParameter("LastName");
 		LOGGER.info("Request parameter: password --> " + lastName);
 		String login = request.getParameter("Login");
 		LOGGER.info("Request parameter: login --> " + login);
@@ -45,28 +45,22 @@ public class AddUserCommand extends CommandStrategy {
 		LOGGER.info("Request parameter: action --> " + action);
 		session.setAttribute("action", action);
 
-
-		/*
-		 * String old_password = request.getParameter("old_password");
-		 * LOGGER.info("Request parameter: password --> " + role); String new_password =
-		 * request.getParameter("confirmed_password");
-		 * LOGGER.info("Request parameter: password --> " + role);
-		 */
 		String confirmed_password = request.getParameter("confirmed_password");
 		LOGGER.info("Request parameter: password --> " + confirmed_password);
 		confirmed_password = PasswordHasher.getHash(confirmed_password);
 		LOGGER.info("Request parameter: password --> " + confirmed_password);
-		User user = new User(firstName,lastName,login,roleId,confirmed_password);
+
+		User user = new User(firstName, lastName, login, roleId, confirmed_password);
 		LOGGER.info("Created user --> " + user);
 		adminLogic.newUserWithDefaultValues(user);
 
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.FORWARD, Path.PAGE_COMPLETED_ADDITION);
+		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_AFTER_ACTION);
 	}
-	
+
 	private int getRoleId(HttpServletRequest request) {
 		String userId = request.getParameter("Role");
-		LOGGER.trace("Role id --> " + userId);
+		LOGGER.info("Role id --> " + userId);
 		return Integer.parseInt(userId);
 	}
 }

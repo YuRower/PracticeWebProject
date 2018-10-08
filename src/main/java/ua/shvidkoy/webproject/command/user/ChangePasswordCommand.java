@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import ua.shvidkoy.webproject.command.CommandStrategy;
-import ua.shvidkoy.webproject.command.user.UpdateUserCommand;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
@@ -34,7 +33,6 @@ public class ChangePasswordCommand extends CommandStrategy {
 		LOGGER.debug("Command starts");
 		HttpSession session = request.getSession();
 
-
 		String oldPassword = request.getParameter("old_password");
 		LOGGER.info("Request parameter: oldPassword --> " + oldPassword);
 		String newPassword = request.getParameter("new_password");
@@ -42,36 +40,40 @@ public class ChangePasswordCommand extends CommandStrategy {
 		String confirmedPassword = request.getParameter("confirmed_password");
 		LOGGER.info("Request parameter: confirmedPassword --> " + confirmedPassword);
 		int userId = getUserId(request);
-
+		String roleUser = request.getParameter("roleUser");
+		LOGGER.info("Request parameter: role User --> " + roleUser);
 		User user = userLogic.getUserByID(userId);
 		LOGGER.info("User --> " + user);
 
-		/*
-		 * if (roleUser.equals("admin")) { user.setPassword(confirmedPassword);
-		 * userLogic.updateUser(user);
-		 * 
-		 * } else {
-		 */
-		LOGGER.info(PasswordHasher.checkPassword(oldPassword, user.getPassword()));
-		if (PasswordHasher.checkPassword(oldPassword, user.getPassword())) {
-			newPassword = PasswordHasher.getHash(newPassword);
+		if (roleUser.equals("admin")) {
+			LOGGER.info("True " );
+			confirmedPassword = PasswordHasher.getHash(confirmedPassword);
 
-			user.setPassword(newPassword);
-			LOGGER.info(PasswordHasher.checkPassword(confirmedPassword, user.getPassword()));
-
-			if (PasswordHasher.checkPassword(confirmedPassword, user.getPassword())) {
-
-				userLogic.updatePassword(user);
-				LOGGER.info("Update completed");
-				LOGGER.info("Updated user -->" + user);
-			} else {
-				throw new ApplicationException("New password does not match with Entered password");
-			}
+			user.setPassword(confirmedPassword);
+			userLogic.updateUser(user);
 
 		} else {
-			throw new ApplicationException("Entered password does not match with old password");
+
+			LOGGER.info(PasswordHasher.checkPassword(oldPassword, user.getPassword()));
+			if (PasswordHasher.checkPassword(oldPassword, user.getPassword())) {
+				newPassword = PasswordHasher.getHash(newPassword);
+
+				user.setPassword(newPassword);
+				LOGGER.info(PasswordHasher.checkPassword(confirmedPassword, user.getPassword()));
+
+				if (PasswordHasher.checkPassword(confirmedPassword, user.getPassword())) {
+
+					userLogic.updatePassword(user);
+					LOGGER.info("Update completed");
+					LOGGER.info("Updated user -->" + user);
+				} else {
+					throw new ApplicationException("New password does not match with Entered password");
+				}
+
+			} else {
+				throw new ApplicationException("Entered password does not match with old password");
+			}
 		}
-		// }
 
 		String action = request.getParameter("action");
 		LOGGER.info("Request parameter: action --> " + action);

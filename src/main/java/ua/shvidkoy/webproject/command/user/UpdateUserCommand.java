@@ -43,10 +43,10 @@ public class UpdateUserCommand extends CommandStrategy {
 		LOGGER.info("Request parameter: login --> " + login);
 		String photo = request.getParameter("pic");
 		LOGGER.info("Request parameter: photo --> " + photo);
-		int roleId = getRoleId(request);
-		LOGGER.info("Request parameter: role --> " + roleId);
+
 		String roleUser = request.getParameter("roleUser");
 		LOGGER.info("Request parameter: role User --> " + roleUser);
+
 		String oldPassword = request.getParameter("old_password");
 		LOGGER.info("Request parameter: oldPassword --> " + oldPassword);
 		String newPassword = request.getParameter("new_password");
@@ -56,38 +56,25 @@ public class UpdateUserCommand extends CommandStrategy {
 
 		User user = userLogic.getUserByID(userId);
 		LOGGER.info("User --> " + user);
-		LOGGER.info("Request parameter: roleUser == Role.getRole(1) --> " + roleUser.equals("admin"));
+		String userRoleId = request.getParameter("Role");
+		int roleId = -1;
+		if (userRoleId != null) {
+			roleId = Integer.parseInt(userRoleId);
+			user.setUserRoleId(roleId);
 
-		/*
-		 * if (roleUser.equals("admin")) { user.setPassword(confirmedPassword);
-		 * userLogic.updateUser(user);
-		 * 
-		 * } else {
-		 */
-		/*
-		 * LOGGER.info(PasswordHasher.checkPassword(oldPassword, user.getPassword()));
-		 * if (PasswordHasher.checkPassword(oldPassword, user.getPassword())) {
-		 * newPassword = PasswordHasher.getHash(newPassword);
-		 * 
-		 * user.setPassword(newPassword);
-		 * LOGGER.info(PasswordHasher.checkPassword(confirmedPassword,
-		 * user.getPassword()));
-		 * 
-		 * if (PasswordHasher.checkPassword(confirmedPassword, user.getPassword())) {
-		 * user.setFirstName(firstName); user.setLastName(lastName);
-		 * user.setLogin(login); user.setUserRoleId(roleId); userLogic.updateUser(user);
-		 * LOGGER.info("Update completed"); LOGGER.info("Updated user -->" + user); }
-		 * else { throw new
-		 * ApplicationException("New password does not match with Entered password"); }
-		 * 
-		 * } else { throw new
-		 * ApplicationException("Entered password does not match with old password"); }
-		 */
-		// }
+			LOGGER.info("Request parameter: role --> " + roleId);
+		}
+
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setLogin(login);
+		userLogic.updateUser(user);
+		LOGGER.info("Update completed");
+		LOGGER.info("Updated user -->" + user);
 
 		String action = request.getParameter("action");
+		session.setAttribute("action", login + " Updated");
 		LOGGER.info("Request parameter: action --> " + action);
-		session.setAttribute("action", action);
 
 		LOGGER.debug("Command finished");
 		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_AFTER_ACTION);

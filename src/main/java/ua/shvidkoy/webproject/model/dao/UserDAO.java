@@ -9,8 +9,6 @@ import ua.shvidkoy.webproject.model.entity.User;
 public interface UserDAO extends CrudDAO<User> {
 	User findUserByLogin(String login) throws ConnectionException, MySqlException;
 
-	boolean isExist(String login) throws MySqlException, ConnectionException;
-
 	List<User> findAll() throws MySqlException, ConnectionException;
 
 	boolean newUserWithDefaultValues(User user) throws  MySqlException, ConnectionException;

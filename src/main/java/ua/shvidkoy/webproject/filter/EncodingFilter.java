@@ -7,14 +7,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
 import org.apache.log4j.Logger;
 
 
-/**
- * Servlet Filter implementation class s
- */
+
 public class EncodingFilter implements Filter {
     private String encoding;
 	private final static Logger LOGGER = Logger.getLogger(EncodingFilter.class);

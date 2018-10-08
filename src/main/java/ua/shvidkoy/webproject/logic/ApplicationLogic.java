@@ -7,7 +7,6 @@ import ua.shvidkoy.webproject.exception.LogicException;
 import ua.shvidkoy.webproject.exception.MySqlException;
 import ua.shvidkoy.webproject.model.dao.AbstractDAOFactory;
 import ua.shvidkoy.webproject.model.dao.UserDAO;
-import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
 import ua.shvidkoy.webproject.model.dao.AbstractDAOFactory.FactoryTypes;
 import ua.shvidkoy.webproject.model.dao.PhotoDAO;

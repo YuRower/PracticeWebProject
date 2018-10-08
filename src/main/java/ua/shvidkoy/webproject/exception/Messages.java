@@ -35,4 +35,8 @@ public class Messages {
 	public static final String ERR_CANNOT_UPDATE_USER_PHOTO = "Cannot update user photo";
 
 	public static final String ERR_CANNOT_INSERT_USER_PHOTO = "Cannot insert user photo";
+
+	public static final String ERR_CANNOT_UPDATE_USER_PASSWORD = "Cannot update a user password";
+
+	public static final String ERR_CANNOT_OBTAIN_PHOTO_BY_ID = "Cannot obtain user photo";
 }

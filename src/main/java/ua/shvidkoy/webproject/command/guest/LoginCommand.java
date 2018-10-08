@@ -41,7 +41,6 @@ public class LoginCommand extends CommandStrategy {
 
 		String password = request.getParameter("password");
 		LOGGER.info("Request parameter: password --> " + password);
-		// password = PasswordHash1.createHash(password);
 
 		if (login == null || password == null || login.trim().isEmpty() || password.trim().isEmpty()) {
 			throw new ApplicationException("Email/password cannot be empty");

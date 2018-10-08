@@ -7,15 +7,9 @@ import java.sql.SQLException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.controller.FrontController;
-
 public final class DBConnector {
 	private final static Logger LOGGER = Logger.getLogger(DBConnector.class);
 
-
-    /*
-     * Registering driver to Mysql server
-     */
     static {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());

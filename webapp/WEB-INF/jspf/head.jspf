@@ -1,17 +1,7 @@
-<%--=========================================================================== 
-Header (top area). 
-===========================================================================--%>
-
 <%@ page import="ua.shvidkoy.webproject.model.enums.Role"%>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 <script src="js/jquery-1.js"></script>
-<script src="js/bootstrap-confirmation.js"></script>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-	src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.7/bootstrap-confirmation.js" >
-</script>
 <tr>
 	<td id="header">
 		<div id="leftHeader">
@@ -28,14 +18,6 @@ Header (top area).
 						<script>
 							$(function() {
 								makeLink();
-								$("#myTable #UserID")
-										.click(
-												function() {
-													var currentUser = $(this).text();
-													document.getElementById('hiddenField').value = currentUser;
-													document.getElementById(
-															"myForm").submit();
-												});
 								$(".header").css("background-color", "green");
 								$("footer").css("background-color", "green");
 							});
@@ -45,20 +27,14 @@ Header (top area).
 				<c:when test="${role.name == 'user'}">
 					<c:set var="roleId" value="user" />
 					<c:set var="title" value="Logout" />
-					<c:out value="${role.name}" /> 
+					
 		<form id="myForm" method="post" action="front_controller">
 						<input type="hidden" name="command" value="redirect_profile" /> <input
 							type="hidden" id="hiddenField" name="param" value="" />
 						<script>
 							$(function() {
 								makeLink();
-								$("#myTable #UserID")
-										.click(
-												function() {
-													var currentUser = $(this).text();
-													document.getElementById('hiddenField').value = currentUser;
-													document.getElementById("myForm").submit();
-												});
+								
 								$(".header").css("background-color", "orange");
 								$("footer").css("background-color", "orange");
 							});

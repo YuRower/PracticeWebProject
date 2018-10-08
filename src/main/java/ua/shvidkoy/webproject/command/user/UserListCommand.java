@@ -33,7 +33,6 @@ public class UserListCommand extends CommandStrategy {
 	@Override
 	public Router execute(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException, ApplicationException {
-		// TODO Auto-generated method stub
 
 		LOGGER.debug("Command starts");
 

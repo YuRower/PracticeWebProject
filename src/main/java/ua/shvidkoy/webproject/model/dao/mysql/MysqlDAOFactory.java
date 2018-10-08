@@ -15,7 +15,6 @@ import ua.shvidkoy.webproject.model.connectionpool.ProxyConnection;
 import ua.shvidkoy.webproject.model.dao.AbstractDAOFactory;
 import ua.shvidkoy.webproject.model.dao.PhotoDAO;
 import ua.shvidkoy.webproject.model.dao.UserDAO;
-import ua.shvidkoy.webproject.model.dao.UserToRoleDAO;
 
 public class MysqlDAOFactory extends AbstractDAOFactory {
 	private static ProxyConnection connection;
@@ -50,10 +49,6 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 		return new PhotoDAOimpl(instance);
 	}
 
-	@Override
-	public UserToRoleDAO getUserToRoleDAO() {
-		return null;
-	}
 
 	public void close(Connection con) {
 		if (con != null) {

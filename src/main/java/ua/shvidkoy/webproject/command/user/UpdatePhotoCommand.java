@@ -41,23 +41,18 @@ public class UpdatePhotoCommand extends CommandStrategy {
 		Photo checkPhoto = userLogic.loadPhotoById(id);
 		if (checkPhoto == null) {
 			Photo photo = new Photo(id, photoName);
-
 			userLogic.insertPhoto(photo);
 			userLogic.insertPhotoToUser(id);
-
 			LOGGER.info("Created photo --> " + photo);
 		} else {
 			Photo photoForUpdate = userLogic.loadPhotoById(id);
 			photoForUpdate.setName(photoName);
 			userLogic.updatePhoto(photoForUpdate);
-
-			session.setAttribute("action", "only one photo can store");
-
+			session.setAttribute("action", "Your photo updated");
 		}
 		LOGGER.debug("Command finished");
 		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_AFTER_ACTION);
 	}
-
 	private int getUserId(HttpServletRequest request) {
 		String userId = request.getParameter("user_photo_id");
 		LOGGER.info("Request parameter: user_photo_id --> " + userId);

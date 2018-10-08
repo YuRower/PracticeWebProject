@@ -126,8 +126,8 @@ public class PhotoDAOimpl implements PhotoDAO {
 				photo = extractPhoto(rs);
 			}
 		} catch (SQLException ex) {
-			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
-			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+			LOGGER.error(Messages.ERR_CANNOT_OBTAIN_PHOTO_BY_ID, ex);
+			throw new MySqlException(Messages.ERR_CANNOT_OBTAIN_PHOTO_BY_ID, ex);
 		} finally {
 			factory.close(con, pstmt, rs);
 		}

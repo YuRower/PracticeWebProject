@@ -2,7 +2,6 @@ package ua.shvidkoy.webproject.command;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
@@ -11,6 +10,8 @@ import ua.shvidkoy.webproject.command.admin.DeleteUserCommand;
 import ua.shvidkoy.webproject.command.admin.RedirectAfterAction;
 import ua.shvidkoy.webproject.command.guest.LoginCommand;
 import ua.shvidkoy.webproject.command.guest.PresentPhotoCommand;
+import ua.shvidkoy.webproject.command.guest.SearchUserCommand;
+import ua.shvidkoy.webproject.command.guest.SortUserCommand;
 import ua.shvidkoy.webproject.command.user.ChangePasswordCommand;
 import ua.shvidkoy.webproject.command.user.LogoutCommand;
 import ua.shvidkoy.webproject.command.user.ProfileCommand;
@@ -39,7 +40,10 @@ public class CommandContainer {
 		commands.put("add_user", new AddUserCommand(new AdminLogic()));
 		commands.put("profile", new ProfileCommand());
 		commands.put("change_password", new ChangePasswordCommand(new UserLogic()));
+		commands.put("search_user", new SearchUserCommand(new  GuestLogic()));
+		commands.put("sortUserId", new SortUserCommand(new  GuestLogic()));
 
+		
 		commands.put("delete_user", new DeleteUserCommand(new AdminLogic()));
 		commands.put("redirect_after_action", new RedirectAfterAction());
 		commands.put("update_photo", new UpdatePhotoCommand(new UserLogic()));

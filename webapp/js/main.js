@@ -23,17 +23,40 @@ $(function() {
 });
 function addUserFunc() {
 	document.getElementById("add_update").value = "add_user";
+	$.ajax({
+		url : 'front_controller',
+		type : 'GET',
+		data : {
+			command : "delete_user",
+			action : "User deleted",
+			userId: user_Id
+		},
+		contentType : 'application/json; charset=utf-8'
+	});
 }
 function updateUserFunc() {
 	document.getElementById("add_update").value = "update_user";
 
 }
-function ConfirmDelete() {
+function ConfirmDelete(user_Id) {
+	alert(user_Id)
 	var x = confirm("Are you sure you want to delete?");
-	if (x)
+	if (x) {
+		$.ajax({
+			url : 'front_controller',
+			type : 'GET',
+			data : {
+				command : "delete_user",
+				action : "User deleted",
+				userId: user_Id
+			},
+			contentType : 'application/json; charset=utf-8'
+		});
 		return true;
-	else
+
+	} else {
 		return false;
+	}
 }
 
 function makeLink() {
@@ -57,15 +80,15 @@ function goBack() {
  * AJAX QUERY
  */
 function searchUser(str) {
-	 var xhttp;    
-	  xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	      //document.getElementById("user_lastName").innerHTML = this.responseText;
-	    	alert(this.responseText);
-	    }
-	  };
-	  xhttp.open("GET", "front_controller?command=search_user", true);
-	  xhttp.send();
-	}
-
+	var xhttp;
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			// document.getElementById("user_lastName").innerHTML =
+			// this.responseText;
+			alert(this.responseText);
+		}
+	};
+	xhttp.open("GET", "front_controller?command=search_user", true);
+	xhttp.send();
+}

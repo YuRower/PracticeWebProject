@@ -245,7 +245,7 @@ input[type=submit] {
 }
 
 /* adjust an animated search form  */
-input[type=text] {
+/*#search_user {
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -260,6 +260,6 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 /* on focus search field  */
-input[type=text]:focus {
+/*#search_user:focus {
     width: 100%;
-}
+}*/

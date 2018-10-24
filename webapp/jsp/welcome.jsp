@@ -96,6 +96,8 @@
 			});
 		}
 	</script>
+	
+	
 
 	<!--  <form action="front_controller" id="sortform" method="POST">
 		<input type="hidden" name="command" value="sortUserId" />
@@ -152,14 +154,14 @@
 
 							<c:if test="${role.name eq 'admin'}">
 								<td>
-									<form action="front_controller" method="POST">
+									<!-- <form action="front_controller" method="POST">
 										<input type="hidden" name="command" value="delete_user" /> <input
 											type="hidden" name="action" value="User deleted" /> <input
-											type="hidden" name="userId" value="${user.id}" />
-										<button type="submit" class="demo" onclick="ConfirmDelete()"
+											type="hidden" name="userId" value="${user.id}" /> -->
+										<button type="submit" class="demo" onclick="ConfirmDelete(${user.id})"
 											style="color: White; background-color: #d9534f; width: 50%;">
 											Delete</button>
-									</form>
+						
 								</td>
 							</c:if>
 					</c:forEach>

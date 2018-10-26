@@ -74,30 +74,8 @@
 			<option value="ID_DSC">Descending</option>
 		</select>
 	</p>
-		<script>
-		function sortUser(select) {
-		     alert(select.options[select.selectedIndex].text);
-		     
-		     var request = $.ajax({
-				url : 'front_controller',
-				type : 'GET',
-				data : {
-					command : "sortUserId",
-					sort_by : select.options[select.selectedIndex].text
-				},
-				contentType : 'application/json; charset=utf-8'
-			});
+	
 
-			request.done(function(data) {
-				alert(data);
-			});
-			request.fail(function(jqXHR, textStatus) {
-				alert("n");
-			});
-		}
-	</script>
-	
-	
 
 	<!--  <form action="front_controller" id="sortform" method="POST">
 		<input type="hidden" name="command" value="sortUserId" />
@@ -158,10 +136,11 @@
 										<input type="hidden" name="command" value="delete_user" /> <input
 											type="hidden" name="action" value="User deleted" /> <input
 											type="hidden" name="userId" value="${user.id}" /> -->
-										<button type="submit" class="demo" onclick="ConfirmDelete(${user.id})"
-											style="color: White; background-color: #d9534f; width: 50%;">
-											Delete</button>
-						
+									<button type="submit" class="demo"
+										onclick="ConfirmDelete(${user.id})"
+										style="color: White; background-color: #d9534f; width: 50%;">
+										Delete</button>
+
 								</td>
 							</c:if>
 					</c:forEach>

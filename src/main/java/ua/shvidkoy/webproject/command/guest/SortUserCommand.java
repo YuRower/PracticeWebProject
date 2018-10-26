@@ -61,7 +61,9 @@ public class SortUserCommand extends CommandStrategy {
 		session.setAttribute("users", userList);
 		LOGGER.info("Get user sorted  list  " + userList);
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.FORWARD, Path.PAGE_START);
+		// response.setContentType("text/html;charset=UTF-8");
+        // response.getWriter().write("True");
+		return new Router(RouteType.FORWARD, Path.TABLE_SORT);
 	}
 
 }

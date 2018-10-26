@@ -14,7 +14,20 @@ function displayModalWindow() {
 		}
 	}
 }
-
+function sortUser(select) {
+    var request = $.ajax({
+		url : 'front_controller',
+		type : 'GET',
+		data : {
+			command : "sortUserId",
+			sort_by : select.options[select.selectedIndex].text
+		},
+		 success: function (data) { 
+				$('#myTable').html(data);
+         
+          }
+        });       
+}
 $(function() {
 	$('del_user').confirmation({
 		selector : '[data-toggle="confirmation"]'

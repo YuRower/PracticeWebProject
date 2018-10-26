@@ -3,6 +3,7 @@ package ua.shvidkoy.webproject.constant;
 public class Path {
 	// pages
 	public static final String PAGE_START = "/jsp/welcome.jsp";
+	public static final String TABLE_SORT = "/ajaxFile/ajaxTable.jsp";
 
 	public static final String PAGE_PROFILE = "/jsp/user_profile.jsp";
 	public static final String PAGE_COMPLETED_ADDITION = "/jsp/user_completed.jsp";

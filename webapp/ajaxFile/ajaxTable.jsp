@@ -54,22 +54,15 @@
 
 							<c:if test="${role.name eq 'admin'}">
 								<td>
-									<!-- <form action="front_controller" method="POST">
-										<input type="hidden" name="command" value="delete_user" /> <input
-											type="hidden" name="action" value="User deleted" /> <input
-											type="hidden" name="userId" value="${user.id}" /> -->
 									<button type="submit" class="demo"
 										onclick="ConfirmDelete(${user.id})"
 										style="color: White; background-color: #d9534f; width: 50%;">
 										Delete</button>
-
 								</td>
 							</c:if>
 					</c:forEach>
-
 				</table>
 		</tr>
-	</table>
-	
+	</table>	
 </body>
 </html>

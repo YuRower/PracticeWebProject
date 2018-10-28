@@ -10,7 +10,6 @@ import ua.shvidkoy.webproject.command.admin.DeleteUserCommand;
 import ua.shvidkoy.webproject.command.admin.RedirectAfterAction;
 import ua.shvidkoy.webproject.command.guest.LoginCommand;
 import ua.shvidkoy.webproject.command.guest.PresentPhotoCommand;
-import ua.shvidkoy.webproject.command.guest.SearchUserCommand;
 import ua.shvidkoy.webproject.command.guest.SortUserCommand;
 import ua.shvidkoy.webproject.command.user.ChangePasswordCommand;
 import ua.shvidkoy.webproject.command.user.LogoutCommand;
@@ -40,7 +39,7 @@ public class CommandContainer {
 		commands.put("add_user", new AddUserCommand(new AdminLogic()));
 		commands.put("profile", new ProfileCommand());
 		commands.put("change_password", new ChangePasswordCommand(new UserLogic()));
-		commands.put("search_user", new SearchUserCommand(new  GuestLogic()));
+	//	commands.put("search_user", new SearchUserCommand(new  GuestLogic()));
 		commands.put("sortUserId", new SortUserCommand(new  GuestLogic()));
 
 		

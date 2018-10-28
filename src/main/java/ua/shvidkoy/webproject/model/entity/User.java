@@ -1,6 +1,7 @@
 package ua.shvidkoy.webproject.model.entity;
 
-public class User extends AbstractEntity {
+
+public class User extends AbstractEntity  {
 
 	private String firstName;
 	private String lastName;

@@ -17,7 +17,6 @@ import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.Photo;
-import ua.shvidkoy.webproject.model.entity.User;
 
 public class PresentPhotoCommand extends CommandStrategy {
 	private final static Logger LOGGER = Logger.getLogger(PresentPhotoCommand.class);

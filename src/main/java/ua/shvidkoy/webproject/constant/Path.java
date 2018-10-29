@@ -14,6 +14,10 @@ public class Path {
 
 	public static final String INDEX = "/index.jsp";
 	public static final String INDEX_LOG = "index.jsp";
+	public static final String FILE_LOADED = "/ajaxFile/fileLoaded.jsp";
+	public static final String USER_UPDATED = "/ajaxFile/user_updated.jsp";
+
+
 
 	// commands
 	public static final String COMMAND_REDIRECT_TO_USERPROFILE = "front_controller?command=redirect_profile";

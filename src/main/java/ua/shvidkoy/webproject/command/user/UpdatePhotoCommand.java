@@ -1,11 +1,14 @@
 package ua.shvidkoy.webproject.command.user;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import org.apache.log4j.Logger;
 
@@ -31,10 +34,6 @@ public class UpdatePhotoCommand extends CommandStrategy {
 			throws IOException, ServletException, ApplicationException {
 		LOGGER.debug("Command starts");
 		HttpSession session = request.getSession();
-
-		String action = request.getParameter("action");
-		LOGGER.info("Request parameter: action --> " + action);
-		session.setAttribute("action", action);
 		String photoName = request.getParameter("pic");
 		LOGGER.info("Request parameter: pic --> " + photoName);
 		int id = getUserId(request);
@@ -48,10 +47,10 @@ public class UpdatePhotoCommand extends CommandStrategy {
 			Photo photoForUpdate = userLogic.loadPhotoById(id);
 			photoForUpdate.setName(photoName);
 			userLogic.updatePhoto(photoForUpdate);
-			session.setAttribute("action", "Your photo updated");
 		}
+		session.setAttribute("updatedPhoto", photoName);
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_AFTER_ACTION);
+		return new Router(RouteType.FORWARD, Path.FILE_LOADED);
 	}
 	private int getUserId(HttpServletRequest request) {
 		String userId = request.getParameter("user_photo_id");

@@ -48,7 +48,6 @@
 								title="Match characters and symbols in the list, a-z,A-Z, 0-9, underscore, hyphen
              {3,15} and Length at least 3 characters and maximum length of 15 ">
 							<br>
-
 							<c:if test="${role.name == 'admin' }">
 								<label>Role</label>
 								<input class="form-control" name="Role" placeholder="Role"
@@ -68,25 +67,19 @@
 									<br>
 								</c:if>
 							</c:if>
-							<br>
-						
-
+							<br>					
 						</div>
 					</div>
-
 					<div class="col-md-5">
 						<c:choose>
-
 							<c:when test="${ not empty userPhoto.name}">
 								<div class="img1">
-
 									<img id="logo" src="img/${userPhoto.name}" alt="not found"
 										<c:out value="${userPhoto.name}" />
 										style="width: 128px; height: 128px;" />
 								</div>
 							</c:when>
 							<c:otherwise>
-
 								<img src="img/img_avatar.png" alt="not found"
 									style="width: 128px; height: 128px;" />
 							</c:otherwise>

@@ -36,11 +36,16 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
+		if (action==null) {
+			dispatch(request, response, "/"+Path.PAGE_ERROR_PAGE);
+
+		}
 		HttpSession session = request.getSession();
 		User user = null;
 		String targetId = request.getParameter("id");
 		LOGGER.info(targetId);
 		StringBuffer sb = new StringBuffer();
+		
 		if (action.equals("complete")) {
 			if (targetId != null) {
 				targetId = targetId.trim().toLowerCase();

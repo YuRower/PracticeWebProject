@@ -33,7 +33,8 @@ function sortUser(select) {
 
 function performAjaxSubmit(select) {
 	var sampleFile = document.getElementById("sampleFile").files[0].name;
-	var request = $.ajax({
+	//alert(sampleFile);
+	 $.ajax({
 		url : 'front_controller',
 		type : 'POST',
 		data : {
@@ -46,12 +47,13 @@ function performAjaxSubmit(select) {
 		}
 	});
 }
+/*
 $(function() {
 	$('del_user').confirmation({
 		selector : '[data-toggle="confirmation"]'
 	});
 
-});
+});*/
 function addUserFunc() {
 	document.getElementById("add_update").value = "add_user";
 }
@@ -59,6 +61,8 @@ function updateUserFunc1() {
 	document.getElementById("add_update").value = "update_user";
 }
 function updateUserFunc() {
+	alert("update787");
+	//updateUserFunc1();
 	var user = document.getElementById("user_ID").value;
 	var role = document.getElementById("role_ID").value;
 	var fn = document.getElementById("First_Name").value;
@@ -67,13 +71,14 @@ function updateUserFunc() {
 	var oldP = document.getElementById("oldPass").value;
 	var newP = document.getElementById("newPass").value;
 	var conP = document.getElementById("conPass").value;
-    var picture = document.getElementById("sampleFile").files[0].name;
-
-	var request = $.ajax({
+    var picture = document.getElementById("sampleFile").files[0]?document.getElementById("sampleFile").files[0].name:'';
+var command = "update_user";
+alert(command);
+	 $.ajax({
 		url : 'front_controller',
 		type : 'POST',
 		data : {
-			command : "update_user",
+			command : command,
 			userId : user,
 			FirstName : fn,
 			LastName : ln,

@@ -72,12 +72,10 @@ public class UpdateUserCommand extends CommandStrategy {
 		LOGGER.info("Update completed");
 		LOGGER.info("Updated user -->" + user);
 
-		String action = request.getParameter("action");
-		session.setAttribute("action", login + " Updated");
-		LOGGER.info("Request parameter: action --> " + action);
+		
 
 		LOGGER.debug("Command finished");
-		return new Router(RouteType.REDIRECT, Path.COMMAND_REDIRECT_AFTER_ACTION);
+		return new Router(RouteType.FORWARD, Path.USER_UPDATED);
 	}
 
 	private int getUserId(HttpServletRequest request) throws ApplicationException {

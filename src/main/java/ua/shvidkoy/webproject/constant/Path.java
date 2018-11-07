@@ -3,6 +3,9 @@ package ua.shvidkoy.webproject.constant;
 public class Path {
 	// pages
 	public static final String PAGE_START = "/jsp/welcome.jsp";
+	public static final String MEDIA_PAGE = "/jsp/media.jsp";
+	public static final String CANVAS_PAGE = "/jsp/animated_canvas.jsp";
+
 	public static final String TABLE_SORT = "/ajaxFile/ajaxTable.jsp";
 	public static final String USER_SEARCH = "/ajaxFile/ajaxSearchUser.jsp";
 
@@ -20,6 +23,7 @@ public class Path {
 
 
 	// commands
+	public static final String COMMAND_REDIRECT_TO_MEDIA = "front_controller?command=redirect_media";
 	public static final String COMMAND_REDIRECT_TO_USERPROFILE = "front_controller?command=redirect_profile";
 	public static final String COMMAND_INITIALIZE_USER_SESSION = "front_controller?command=init_user_list";
 	public static final String COMMAND_REDIRECT_AFTER_ACTION = "front_controller?command=redirect_after_action";

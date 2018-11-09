@@ -1,3 +1,2 @@
 # PracticeWebProject
-WebDesign Karazin Course
-finished laba4
+WebDesign Karazin Course( finished laba4 )

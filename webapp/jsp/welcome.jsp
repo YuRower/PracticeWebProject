@@ -33,8 +33,10 @@
 					required>
 
 				<button type="submit" value="Login">Login</button>
+				
 
 			</div>
+			
 			<div id="message">
 				<h3>Password must contain the following:</h3>
 				<p id="letter" class="invalid">
@@ -62,8 +64,8 @@
 		class="ua.shvidkoy.webproject.model.entity.Photo" />
 <body onload="init()">
 	<form name="autofillform" action="SearchServlet">
-	
-			
+
+
 		<table border="0" cellspacing="5">
 			<thead>
 				<tr>
@@ -86,13 +88,6 @@
 		</table>
 	</form>
 </body>
-<!--  <form id="search_user">
-		<input type="text" name="search" placeholder="Search.."
-			onchange="searchUser(this.value)"> <input type="hidden"
-			name="seeked_lastName" value="this.value" />
-	</form> -->
-
-
 
 
 <p>
@@ -104,10 +99,7 @@
 </p>
 
 
-<!--  <form action="front_controller" id="sortform" method="POST">
-		<input type="hidden" name="command" value="sortUserId" />
-		 <input type="submit" value="Sorting" style="width: 10%;" />
-	</form>-->
+
 
 <table id="myTable">
 	<tr>

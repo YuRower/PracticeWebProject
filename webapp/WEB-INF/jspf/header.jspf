@@ -30,6 +30,7 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="header">
+
 		<div id="id00">
 			<c:if test="${ title eq 'Logout'}">
 				<button onclick="location.href='front_controller?command=logout';"
@@ -42,6 +43,15 @@
 					<c:out value="${title}" />
 				</button>
 			</c:if>
+			<div class="topnav">
+
+				<a class="active" href="front_controller?command=media">Media</a>
+			</div>
+			<div class="topnav1">
+
+				<a class="active" href="front_controller?command=redirectToCanvas">Canvas</a>
+			</div>
+
 		</div>
 	</div>
 </body>

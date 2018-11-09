@@ -1,284 +1,289 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
 
 footer {
-  overflow: hidden;
-  background-color: #ce2f2f;
-  padding: 20px 10px;
-  margin: 24px 0 12px 0;
-  
+	overflow: hidden;
+	background-color: #ce2f2f;
+	padding: 20px 10px;
+	margin: 24px 0 12px 0;
 }
+
 .header {
-  overflow: hidden;
-  background-color: #ce2f2f;
-  padding: 20px 10px;
+	overflow: hidden;
+	background-color: #ce2f2f;
+	padding: 20px 10px;
 }
 
 .popupBox {
-  position: absolute;
-  top: 170px;
-  left: 140px;
+	position: absolute;
+	top: 170px;
+	left: 140px;
 }
 
 .popupCell {
-   background-color: #fffafa;
+	background-color: #fffafa;
 }
 
 .popupCell:hover {
-  background-color: #f5ebe9;
+	background-color: #f5ebe9;
 }
 
 .popupItem {
-  color: #333;
-  text-decoration: none;
-  font-size: 1.2em;
+	color: #333;
+	text-decoration: none;
+	font-size: 1.2em;
 }
+
 .header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px; 
-  line-height: 25px;
-  border-radius: 4px;
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 25px;
+	border-radius: 4px;
 }
-
-
 
 .header a.active {
-  background-color: dodgerblue;
-  color: white;
+	background-color: dodgerblue;
+	color: white;
 }
 
 .header-right {
-  float: right;
+	float: right;
 }
 
-
 /* Full-width input fields */
-
 input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
 }
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
 }
+
 .button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
 
 button:hover {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 /* Extra styles for the cancel button */
 .cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
+	width: auto;
+	padding: 10px 18px;
+	background-color: #f44336;
 }
 
 /* Center the image and position the close button */
 .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
+	text-align: center;
+	margin: 24px 0 12px 0;
+	position: relative;
 }
 
 img.avatar {
-    width: 40%;
-    border-radius: 50%;
+	width: 40%;
+	border-radius: 50%;
 }
 
-
 .container {
-    padding: 16px;
+	padding: 16px;
 }
 
 span.psw {
-    float: right;
-    padding-top: 16px;
+	float: right;
+	padding-top: 16px;
 }
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
 .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
 }
 
 /* Add Zoom Animation */
 .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
 }
 
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
+@
+-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)
 }
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+
+to {
+	-webkit-transform: scale(1)
+}
+
+}
+@
+keyframes animatezoom {
+	from {transform: scale(0)
+}
+
+to {
+	transform: scale(1)
+}
+
 }
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
+	span.psw {
+		display: block;
+		float: none;
+	}
+	.cancelbtn {
+		width: 100%;
+	}
 }
+
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
 }
 
 th, td {
-    text-align: left;
-    padding: 16px;
+	text-align: left;
+	padding: 16px;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2
+	background-color: #f2f2f2
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 16px;
 }
 
 /* Style the submit button */
 input[type=submit] {
-    background-color: #4CAF50;
-    color: white;
+	background-color: #4CAF50;
+	color: white;
 }
 
 /* Style the container for inputs */
 .container {
-    background-color: #f1f1f1;
-    padding: 20px;
+	background-color: #f1f1f1;
+	padding: 20px;
 }
 
 /* The message box is shown when the user clicks on the password field */
 #message {
-    display:none;
-    background: #f1f1f1;
-    color: #000;
-    position: relative;
-    padding: 20px;
-    margin-top: 10px;
+	display: none;
+	background: #f1f1f1;
+	color: #000;
+	position: relative;
+	padding: 20px;
+	margin-top: 10px;
 }
 
 #message p {
-    padding: 10px 35px;
-    font-size: 18px;
+	padding: 10px 35px;
+	font-size: 18px;
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
 .valid {
-    color: green;
+	color: green;
 }
 
 .valid:before {
-    position: relative;
-    left: -35px;
-    content: "✔";
+	position: relative;
+	left: -35px;
+	content: "✔";
 }
 
 /* Add a red text color and an "x" when the requirements are wrong */
 .invalid {
-    color: red;
+	color: red;
 }
 
 .invalid:before {
-    position: relative;
-    left: -35px;
-    content: "✖";
+	position: relative;
+	left: -35px;
+	content: "✖";
+}
+/*Media*/
+.topnav {
+	float: right;
 }
 
-/* adjust an animated search form  */
-/*#search_user {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('img/searchicon.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+.topnav1 {
+	float: right;
+	position: relative;
+	margin: 0px 5px 0px 0px;
 }
-/* on focus search field  */
-/*#search_user:focus {
-    width: 100%;
-}*/
+
+/*laba4*/
+canvas {
+	background: #eee;
+}

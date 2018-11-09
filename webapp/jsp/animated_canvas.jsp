@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2 style="color: red;">
-		<b><i>Bouncing ball animation in canvas</i></b>
+		<b><i>LABA4 animation in canvas</i></b>
 	</h2>
 	<br>
 	<p>Color:</p>
@@ -21,7 +21,7 @@
 
 	<form>
 		<p>
-			<input type="radio" id="circle" name="figure" value="circle" checked onclick="check(this);">
+			<input type="radio" id="circle" name="figure" value="circle"  onclick="check(this);">
 			Circle <br> <input type="radio" id="rectangle" name="figure" value="rectangle"
 				onclick="check(this);">Rectangle <br>
 		</p>

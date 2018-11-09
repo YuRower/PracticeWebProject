@@ -1,35 +1,33 @@
 var canvas = document.getElementById('my_canvas');
 var ctx = canvas.getContext('2d');
+var myVar;
 
 var start_position = {
 	x : 20,
 	y : 20
-};
-var rect = {
-	x : 0,
-	y : 75,
-	width : 100,
-	height : 50,
-	borderWidth : 5
 };
 var velocity = 3, corner = 50, radius = 20;
 var ball = {
 	x : start_position.x,
 	y : start_position.y
 };
+var rectangle = {
+		x : start_position.x,
+		y : start_position.y
+	};
+
+var moveX = Math.cos(Math.PI / 180 * corner) * velocity;
+var moveY = Math.sin(Math.PI / 180 * corner) * velocity;
 
 function initCanvasCircle() {
 	ctx.beginPath();// launch new path of figure
 	ctx.fillStyle = window.sessionStorage.getItem("key3");
 	ctx.arc(ball.x, ball.y, radius * window.sessionStorage.getItem("key1"), 0,
 			Math.PI * 2, false);// draw curve
-    context.rect(rect.x, rect.y, rect.width, rect.height);
+	// context.rect(rect.x, rect.y, rect.width, rect.height);
 	ctx.fill();// fills the current drawing (path)
 	ctx.closePath();// close the path of figure
-	// animFrame();
 }
-var moveX = Math.cos(Math.PI / 180 * corner) * velocity;
-var moveY = Math.sin(Math.PI / 180 * corner) * velocity;
 
 function drawCanv() {
 	ctx.clearRect(0, 0, 400, 300);
@@ -39,33 +37,47 @@ function drawCanv() {
 		moveY = -moveY;
 
 	ball.x += moveX * window.sessionStorage.getItem("key2");
-	;
+
 	ball.y += moveY * window.sessionStorage.getItem("key2");
 
 	initCanvasCircle();
 }
 
-function drawCanvRect(rect, canvas, context, startTime) {
-    var time = (new Date()).getTime() - startTime;
-    var linearSpeed = 100;
-    var newX = linearSpeed * time / 1000;
 
-    if (newX < canvas.width - rect.width - rect.borderWidth / 2) {
-        rect.x = newX;
-    }
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    drawRectangle(rect, context);
+var dx = 2;
+var dy = 4;
+function rect(x, y, w, h) {
+	ctx.beginPath();
+	ctx.fillStyle = window.sessionStorage.getItem("key3");
+	ctx.rect(x, y, w, h);
+	ctx.closePath();
+	ctx.fill();
+}
+function drawRect() {
+	ctx.clearRect(0, 0, 400, 300);
+
+	if (rectangle.x + dx > canvas.width || rectangle.x + dx < 0)
+		dx = -dx;
+	if (rectangle.y + dy > canvas.height || rectangle.y + dy < 0)
+		dy = -dy;
+
+	rectangle.x += dx * window.sessionStorage.getItem("key2");
+	rectangle.y += dy* window.sessionStorage.getItem("key2") ;
+	rect(rectangle.x, rectangle.y, 20*window.sessionStorage.getItem("key1"), 20*window.sessionStorage.getItem("key1"));
+
 }
 
 function check(radio) {
 	if (document.getElementById('circle').checked) {
-
-		
+		clearInterval(myVar);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		myVar = setInterval(drawCanv, 1000 / 60);
 	}
+	
 	if (document.getElementById('rectangle').checked) {
-		/*drawCanvRect(rect, canvas, ctx, new Date().getTime());
-		setInterval(drawCanvRect(rect, canvas, ctx, new Date().getTime()), 1000 / 60);*/
-
+		clearInterval(myVar);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		myVar = setInterval(drawRect, 1000 / 60);
 	}
 }
 var speed = document.getElementById('fig_speed');
@@ -87,5 +99,6 @@ select.onchange = function() {
 	 * select.selectedIndex) { drawCanv(select.options[i].value); } }
 	 */
 }
-setInterval(drawCanv, 1000 / 60);
+
+// setInterval(drawCanv, 1000 / 60);
 

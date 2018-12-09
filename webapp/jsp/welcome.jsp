@@ -1,11 +1,31 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 <!DOCTYPE html>
-<html>
+
+<html ng-app="AngularTestApp">
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 <head>
 <title>Web Practice</title>
 </head>
+<script>
+        var model = "Welcome To My WEBSITE";
+
+
+        app.controller("ChangeCtrl", function ($scope) {
+            $scope.message = model;
+
+            $scope.clickHandler = function () {
+                $scope.message = $scope.text;
+            }
+        });
+
+    </script>
+    
+<body ng-controller="ChangeCtrl">
+    <h1 align="center"> {{message}}</h1>
+    Input your greeting with angular<input ng-model="text"  />
+    <button ng-click="clickHandler()"style="color: White;  width: 25%;"> Update</button>
+</body>
 <body>
 	<c:set var="registered_user" value="${user.id}" scope="session" />
 	<!-- coding: ${ pageContext.request.characterEncoding }-->
@@ -98,74 +118,15 @@
 	</select>
 </p>
 
+<div ng-controller="SampleAppCtrl" class="container" style="margin-top:10px;">
+        <div class="btn-group">
+            <button class="btn btn-default" ng-click="showList()"style="color: White;  width: 25%;">List</button>
+            <button class="btn btn-default" ng-click="showTable()"style="color: White;  width: 25%;">Table</button>
+        </div>
 
+        <ng-include src="url"></ng-include>
+    </div>
 
-
-<table id="myTable">
-	<tr>
-
-		<td class="content center">
-			<h3>User List</h3>
-			<table class="center">
-
-				<tr class="headTable">
-					<th>ID</th>
-					<th>Name</th>
-					<th>Surname</th>
-					<th>Login</th>
-					<th>Role</th>
-					<th>Photo</th>
-				</tr>
-
-				<c:forEach var="user" items="${users}">
-					<input type="hidden" name="user" value="${users}"
-						form="search_user">
-					<tr>
-
-						<td id="UserID"><c:out value="${user.id}" /></td>
-						<td><c:out value="${user.firstName}" /></td>
-						<td><c:out value="${user.lastName}" /></td>
-						<td><c:out value="${user.login}" /></td>
-						<c:choose>
-							<c:when test="${user.userRoleId== 1}">
-								<td><c:out value="Admin" /></td>
-							</c:when>
-							<c:when test="${user.userRoleId== 2}">
-								<td><c:out value="User" /></td>
-							</c:when>
-							<c:otherwise>
-								<td><c:out value="Guest" /></td>
-							</c:otherwise>
-						</c:choose>
-						<c:if test="${user.userPhotoId eq '0'}">
-							<td><img src="img/img_avatar.png"
-								style="width: 128px; height: 128px;" /></td>
-						</c:if>
-						<c:forEach var="photo" items="${photos}">
-							<c:if test="${user.userPhotoId eq photo.id}">
-								<td><img src="img/${photo.name}"
-									onerror="if (this.src != 'img/img_avatar.png') this.src = 'img/img_avatar.png';"
-									style="width: 128px; height: 128px;" /></td>
-							</c:if>
-						</c:forEach>
-
-						<c:if test="${role.name eq 'admin'}">
-							<td>
-								<form action="front_controller" method="POST">
-									<input type="hidden" name="command" value="delete_user" /> <input
-										type="hidden" name="action" value="User deleted" /> <input
-										type="hidden" name="userId" value="${user.id}" />
-									<button type="submit" class="demo" onclick="ConfirmDelete()"
-										style="color: White; background-color: #d9534f; width: 50%;">
-										Delete</button>
-								</form>
-							</td>
-						</c:if>
-				</c:forEach>
-
-			</table>
-	</tr>
-</table>
 <c:if test="${role.name eq 'admin'}">
 	<script>
 		$('tr.headTable').append('<th colspan="5">Delete User</th>');

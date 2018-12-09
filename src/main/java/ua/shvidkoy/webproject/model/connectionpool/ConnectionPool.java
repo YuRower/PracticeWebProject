@@ -20,7 +20,7 @@ import ua.shvidkoy.webproject.model.connectionpool.utill.DBConnector;
 import ua.shvidkoy.webproject.model.connectionpool.utill.DBResourceManager;
 
 public class ConnectionPool {
-	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
+	private final static Logger LOGGER = Logger.getLogger(ConnectionPool.class);
 
     private static AtomicBoolean instanceCreated = new AtomicBoolean(false);
     private static ReentrantLock instanceLock = new ReentrantLock(true);

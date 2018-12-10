@@ -60,8 +60,8 @@ function addUserFunc() {
 function updateUserFunc1() {
 	document.getElementById("add_update").value = "update_user";
 }
+
 function updateUserFunc() {
-	alert("update787");
 	//updateUserFunc1();
 	var user = document.getElementById("user_ID").value;
 	var role = document.getElementById("role_ID").value;
@@ -73,7 +73,6 @@ function updateUserFunc() {
 	var conP = document.getElementById("conPass").value;
     var picture = document.getElementById("sampleFile").files[0]?document.getElementById("sampleFile").files[0].name:'';
 var command = "update_user";
-alert(command);
 	 $.ajax({
 		url : 'front_controller',
 		type : 'POST',

@@ -7,32 +7,22 @@
 <head>
 <title>Web Practice</title>
 </head>
-<script>
-        var model = "Welcome To My WEBSITE";
 
-
-        app.controller("ChangeCtrl", function ($scope) {
-            $scope.message = model;
-
-            $scope.clickHandler = function () {
-                $scope.message = $scope.text;
-            }
-        });
-
-    </script>
-    
 <body ng-controller="ChangeCtrl">
-    <h1 align="center"> {{message}}</h1>
-    Input your greeting with angular<input ng-model="text"  />
-    <button ng-click="clickHandler()"style="color: White;  width: 25%;"> Update</button>
+	<h1 align="center">{{message}}</h1>
+	Input your greeting with angular
+	<input ng-model="text" />
+	<button ng-click="clickHandler()" style="color: White; width: 25%;">
+		Update</button>
 </body>
+
 <body>
 	<c:set var="registered_user" value="${user.id}" scope="session" />
-	<!-- coding: ${ pageContext.request.characterEncoding }-->
-	<div id="id01" class="modal">
+	<div id="id01" class="modal" ng-controller="validateCtrl">
 
-		<form id="login_form" action="front_controller" method="post"
-			class="modal-content animate">
+		<form id="login_form" name="myForm" action="front_controller"
+			method="post" class="modal-content animate" novalidate
+			ng-submit="addNewUser(newUser, myForm.$valid)">
 
 			<input type="hidden" name="command" value="login" />
 			<div class="imgcontainer">
@@ -41,40 +31,45 @@
 			</div>
 
 			<div class="container">
-				<label for="login"><b>Username</b></label> <input type="text"
-					placeholder="Enter Login" name="login"
-					pattern="^[a-zA-Z0-9_-]{3,15}$"
-					title="Match characters and symbols in the list, a-z,A-Z, 0-9, underscore, hyphen
-             {3,15} and Length at least 3 characters and maximum length of 15 ">
-				<label for="psw">Password</label> <input type="password" id="psw"
-					placeholder="Enter Password" name="password"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
-					title="Must contain at least one number and one uppercase and lowercase letter, and at least 4 or more characters"
-					required>
+				<div class="form-group">
+					<label for="login"><b>Username</b></label> <input type="text"
+						name="login" required ng-model="newUser.name">
+					<div class="error"
+						ng-show="myForm.login.$invalid && myForm.login.$dirty">
+						{{getError(myForm.login.$error)}}</div>
+				</div>
+				<div class="form-group">
 
-				<button type="submit" value="Login">Login</button>
-				
+					<label for="psw">Password</label> <input type="password"
+						name="userPassword" id="psw" required ng-model="newUser.password">
+					<div class="error"
+						ng-show="myForm.userPassword.$invalid && myForm.userPassword.$dirty">
+						{{getError(myForm.userPassword.$error)}}</div>
+				</div>
+
+				<div class="form-group">
+					<label>Email:</label> <input name="userEmail" type="email"
+						class="form-control" required ng-model="newUser.email">
+					<div class="error"
+						ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">
+						{{getError(myForm.userEmail.$error)}}</div>
+				</div>
+
+				<button type="submit" value="Login" ng-disabled="myForm.$invalid">Login</button>
 
 			</div>
-			
-			<div id="message">
-				<h3>Password must contain the following:</h3>
-				<p id="letter" class="invalid">
-					A <b>lowercase</b> letter
-				</p>
-				<p id="capital" class="invalid">
-					A <b>capital (uppercase)</b> letter
-				</p>
-				<p id="number" class="invalid">
-					A <b>number</b>
-				</p>
-				<p id="length" class="invalid">
-					Minimum <b>4 characters</b>
-				</p>
-			</div>
+
 			<div class="container" style="background-color: #f1f1f1">
 				<button type="button" onclick="closeModalWindow()" class="cancelbtn">Cancel</button>
 				<span class="password">Forgot <a href="#">password?</a></span>
+			</div>
+			<div class="well">
+				Message: {{message}}
+				<div>
+					Valid: <span class="summary"
+						ng-class="myForm.$valid ? 'ng-valid' : 'ng-invalid'">
+						{{myForm.$valid}} </span>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -84,7 +79,6 @@
 		class="ua.shvidkoy.webproject.model.entity.Photo" />
 <body onload="init()">
 	<form name="autofillform" action="SearchServlet">
-
 
 		<table border="0" cellspacing="5">
 			<thead>
@@ -109,6 +103,32 @@
 	</form>
 </body>
 
+<body ng-controller="ajaxCtrl">
+	<div class="panel panel-primary" ng-controller="ajaxCtrl">
+		<div class="panel-heading">
+			<div class="panel-title">
+				<button class="btn btn-success" style="color: White; width: 25%;"ng-click="sendRequest()">
+					<h2>Get Currency</h2>
+				</button>
+			</div>
+		</div>
+		<table class="table">
+			<tr>
+				<th>ccy</th>
+				<th>base_ccy</th>
+				<th>buy</th>
+				<th>sale</th>
+			</tr>
+			<tr ng-repeat="item in items">
+				<td>{{item.ccy}}</td>
+				<td>{{item.base_ccy}}</td>
+				<td>{{item.buy}}</td>
+				<td>{{item.sale}}</td>
+
+			</tr>
+		</table>
+	</div>
+</body>
 
 <p>
 	<c:out value="Sort by: " />
@@ -118,14 +138,17 @@
 	</select>
 </p>
 
-<div ng-controller="SampleAppCtrl" class="container" style="margin-top:10px;">
-        <div class="btn-group">
-            <button class="btn btn-default" ng-click="showList()"style="color: White;  width: 25%;">List</button>
-            <button class="btn btn-default" ng-click="showTable()"style="color: White;  width: 25%;">Table</button>
-        </div>
+<div ng-controller="viewTableCtrl" class="container"
+	style="margin-top: 10px;">
+	<div class="btn-group">
+		<button class="btn btn-default" ng-click="showList()"
+			style="color: White; width: 25%;">List</button>
+		<button class="btn btn-default" ng-click="showTable()"
+			style="color: White; width: 25%;">Table</button>
+	</div>
+	<ng-include src="url"></ng-include>
+</div>
 
-        <ng-include src="url"></ng-include>
-    </div>
 
 <c:if test="${role.name eq 'admin'}">
 	<script>

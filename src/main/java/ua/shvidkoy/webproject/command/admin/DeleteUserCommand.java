@@ -9,14 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.AdminLogic;
 
-public class DeleteUserCommand extends CommandStrategy {
+public class DeleteUserCommand extends Command {
 	private static final Logger LOGGER = Logger.getLogger(DeleteUserCommand.class);
 
 	private AdminLogic adminLogic;

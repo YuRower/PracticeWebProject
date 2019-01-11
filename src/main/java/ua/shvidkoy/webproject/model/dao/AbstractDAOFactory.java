@@ -2,22 +2,21 @@ package ua.shvidkoy.webproject.model.dao;
 
 import java.sql.SQLException;
 
-import ua.shvidkoy.webproject.exception.ConnectionException;
-import ua.shvidkoy.webproject.exception.MySqlException;
-import ua.shvidkoy.webproject.model.connectionpool.ProxyConnection;
 import ua.shvidkoy.webproject.model.dao.mysql.MysqlDAOFactory;
 
 public abstract class AbstractDAOFactory {
-	
-	public enum FactoryTypes{
+
+	public enum FactoryTypes {
 		MYSQL
 	}
 
 	public abstract UserDAO getUserDAO();
+
 	public abstract PhotoDAO getPhotoDAO();
 
-	public static AbstractDAOFactory getDAOFactory(FactoryTypes type) {//throws MySqlException, ConnectionException, SQLException {
+	public abstract MediaDAO getMediaDAO();
 
+	public static AbstractDAOFactory getDAOFactory(FactoryTypes type) {
 		switch (type) {
 		case MYSQL:
 			try {
@@ -29,4 +28,6 @@ public abstract class AbstractDAOFactory {
 			return null;
 		}
 	}
+
+	
 }

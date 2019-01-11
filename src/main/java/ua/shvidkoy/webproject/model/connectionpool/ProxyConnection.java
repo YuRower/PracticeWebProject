@@ -30,20 +30,13 @@ public class ProxyConnection implements Connection {
     }
 
 
-    /**
-     * Releases this connection to the connection poll
-     * instead of closing it.
-     */
+   
     @Override
     public void close() throws SQLException {
         ConnectionPool.getInstance().releaseConnection(this);
     }
 
-    /**
-     * Closes this connection.
-     *
-     * @throws SQLException SQLException if a database access error occurs
-     */
+   
     void closeConnection() throws SQLException {
         connection.close();
     }

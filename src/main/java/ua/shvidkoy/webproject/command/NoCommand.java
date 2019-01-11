@@ -14,7 +14,7 @@ import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
 
-public class NoCommand extends CommandStrategy {
+public class NoCommand extends Command {
 	private final static Logger LOGGER = Logger.getLogger(RedirectToProfileCommand.class);
 
 	@Override

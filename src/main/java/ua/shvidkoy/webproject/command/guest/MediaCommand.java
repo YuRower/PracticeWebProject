@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
@@ -18,7 +18,7 @@ import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.Media;
 
-public class MediaCommand extends CommandStrategy {
+public class MediaCommand extends Command {
 	private GuestLogic guestLogic;
 	private final static Logger LOGGER = Logger.getLogger(MediaCommand.class);
 

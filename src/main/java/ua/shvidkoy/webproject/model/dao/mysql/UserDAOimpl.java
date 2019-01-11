@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import ua.shvidkoy.webproject.exception.ConnectionException;
 import ua.shvidkoy.webproject.exception.Messages;
 import ua.shvidkoy.webproject.exception.MySqlException;
-import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
 import ua.shvidkoy.webproject.model.connectionpool.ProxyConnection;
 import ua.shvidkoy.webproject.model.dao.UserDAO;
 import ua.shvidkoy.webproject.model.entity.User;

@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
 
-public class ProfileCommand extends CommandStrategy {
+public class ProfileCommand extends Command {
 
 private final static Logger LOGGER = Logger.getLogger(RedirectToProfileCommand.class);
 	

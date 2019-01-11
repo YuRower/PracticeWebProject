@@ -14,7 +14,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.controller.FrontController;
 import ua.shvidkoy.webproject.exception.ConnectionException;
 import ua.shvidkoy.webproject.model.connectionpool.utill.DBConnector;
 import ua.shvidkoy.webproject.model.connectionpool.utill.DBResourceManager;
@@ -93,46 +92,7 @@ public class ConnectionPool {
         }
     }
 
-    public void closeConnections() {
-
-        for (int i = 0; i < connectionsCreatedCount.get(); i++) {
-            poolLock.lock();
-            try {
-                while (connectionPool.isEmpty()) {
-                    isFree.await();
-                }
-                ProxyConnection proxyConnection = connectionPool.poll();
-                proxyConnection.closeConnection();
-            } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, "current thread was interrupted, can't close connection.", e);
-            } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "problems with closing connection, connection wasn't closed.", e);
-            } finally {
-                poolLock.unlock();
-            }
-        }
-        if (connectionsCreatedCount.get() != 0) {
-            LOGGER.log(Level.TRACE, "all connections to database were closed (check error log if errors were acquired).");
-        }
-        deregisterDrivers();
-    }
-
-  
-    private void deregisterDrivers() {
-
-        Enumeration<Driver> drivers = DriverManager.getDrivers();
-        while (drivers.hasMoreElements()) {
-            Driver driver = drivers.nextElement();
-            try {
-                DriverManager.deregisterDriver(driver);
-            } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "exception while deregistering driver, driver wasn't deregistered", e);
-            }
-        }
-        LOGGER.log(Level.TRACE, "all SQL drivers were deregistered (check error log if errors were acquired).");
-    }
-
-    
+   
     private int initPoolSize() {
         int value;
         try {

@@ -33,7 +33,6 @@ function sortUser(select) {
 
 function performAjaxSubmit(select) {
 	var sampleFile = document.getElementById("sampleFile").files[0].name;
-	//alert(sampleFile);
 	 $.ajax({
 		url : 'front_controller',
 		type : 'POST',
@@ -47,13 +46,7 @@ function performAjaxSubmit(select) {
 		}
 	});
 }
-/*
-$(function() {
-	$('del_user').confirmation({
-		selector : '[data-toggle="confirmation"]'
-	});
 
-});*/
 function addUserFunc() {
 	document.getElementById("add_update").value = "add_user";
 }
@@ -62,7 +55,6 @@ function updateUserFunc1() {
 }
 
 function updateUserFunc() {
-	//updateUserFunc1();
 	var user = document.getElementById("user_ID").value;
 	var role = document.getElementById("role_ID").value;
 	var fn = document.getElementById("First_Name").value;

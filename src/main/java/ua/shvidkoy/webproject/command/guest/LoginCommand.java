@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.CommandContainer;
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
@@ -21,7 +20,7 @@ import ua.shvidkoy.webproject.model.enums.Role;
 import ua.shvidkoy.webproject.utill.PasswordHasher;
 
 
-public class LoginCommand extends CommandStrategy {
+public class LoginCommand extends Command {
 	private GuestLogic guestLogic;
 	private final static Logger LOGGER = Logger.getLogger(LoginCommand.class);
 

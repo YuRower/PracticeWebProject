@@ -29,11 +29,11 @@ public class CommandContainer {
 
 	private final static Logger LOGGER = Logger.getLogger(CommandContainer.class);
 
-	private static Map<String, CommandStrategy> commands = new HashMap<String, CommandStrategy>();
+	private static Map<String, Command> commands = new HashMap<String, Command>();
 
 	static {
-		commands.put("sortUserId", new SortUserCommand(new  GuestLogic()));
-		commands.put("media", new MediaCommand(new  GuestLogic()));
+		commands.put("sortUserId", new SortUserCommand());
+		commands.put("media", new MediaCommand(new GuestLogic()));
 		commands.put("get_photo", new PresentPhotoCommand(new GuestLogic()));
 		commands.put("login", new LoginCommand(new GuestLogic()));
 		commands.put("init_user_list", new UserListCommand(new GuestLogic()));
@@ -44,8 +44,6 @@ public class CommandContainer {
 		commands.put("redirectToCanvas", new RedirectCanvas());
 		commands.put("redirect_after_action", new RedirectAfterAction());
 
-		
-		
 		commands.put("update_user", new UpdateUserCommand(new UserLogic()));
 		commands.put("redirect_profile", new RedirectToProfileCommand(new UserLogic()));
 		commands.put("change_password", new ChangePasswordCommand(new UserLogic()));
@@ -58,7 +56,7 @@ public class CommandContainer {
 		LOGGER.trace("Number of commands --> " + commands.size());
 	}
 
-	public static CommandStrategy get(String commandName) {
+	public static Command get(String commandName) {
 		if (commandName == null || !commands.containsKey(commandName)) {
 			LOGGER.info("Command not found, name --> " + commandName);
 			return commands.get("commandNotFound");

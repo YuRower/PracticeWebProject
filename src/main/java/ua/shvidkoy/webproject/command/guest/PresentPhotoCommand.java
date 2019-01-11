@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
@@ -18,7 +18,7 @@ import ua.shvidkoy.webproject.exception.ApplicationException;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.Photo;
 
-public class PresentPhotoCommand extends CommandStrategy {
+public class PresentPhotoCommand extends Command {
 	private final static Logger LOGGER = Logger.getLogger(PresentPhotoCommand.class);
 	private GuestLogic guestLogic;
 

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
@@ -19,7 +19,7 @@ import ua.shvidkoy.webproject.logic.UserLogic;
 import ua.shvidkoy.webproject.model.entity.Photo;
 import ua.shvidkoy.webproject.model.entity.User;
 
-public class RedirectToProfileCommand extends CommandStrategy {
+public class RedirectToProfileCommand extends Command {
 	private final static Logger LOGGER = Logger.getLogger(RedirectToProfileCommand.class);
 	UserLogic userLogic;
 

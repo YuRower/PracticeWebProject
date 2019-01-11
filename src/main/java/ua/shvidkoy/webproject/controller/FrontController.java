@@ -1,10 +1,7 @@
 package ua.shvidkoy.webproject.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +11,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import ua.shvidkoy.webproject.command.CommandContainer;
-import ua.shvidkoy.webproject.command.CommandStrategy;
+import ua.shvidkoy.webproject.command.Command;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.controller.Router.RouteType;
 import ua.shvidkoy.webproject.exception.ApplicationException;
@@ -23,7 +20,6 @@ import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
 public class FrontController extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
 
-	private static final String COMMAND = "command";
 
 	@Override
 	public void init() throws ServletException {
@@ -33,7 +29,6 @@ public class FrontController extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		ConnectionPool.getInstance().closeConnections();
 		LOGGER.log(Level.INFO, "Destroy servlet");
 	}
 
@@ -57,7 +52,7 @@ public class FrontController extends HttpServlet {
 		String commandName = request.getParameter("command");
 		LOGGER.trace("Request parameter: command --> " + commandName);
 
-		CommandStrategy command = CommandContainer.get(commandName);
+		Command command = CommandContainer.get(commandName);
 		LOGGER.trace("Obtained command --> " + command);
 
 		Router requestProcessorInfo = new Router(RouteType.FORWARD, Path.PAGE_ERROR_PAGE);

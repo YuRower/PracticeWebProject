@@ -7,18 +7,18 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.controller.FrontController;
 import ua.shvidkoy.webproject.exception.ConnectionException;
 import ua.shvidkoy.webproject.exception.Messages;
 import ua.shvidkoy.webproject.model.connectionpool.ConnectionPool;
 import ua.shvidkoy.webproject.model.connectionpool.ProxyConnection;
 import ua.shvidkoy.webproject.model.dao.AbstractDAOFactory;
+import ua.shvidkoy.webproject.model.dao.MediaDAO;
 import ua.shvidkoy.webproject.model.dao.PhotoDAO;
 import ua.shvidkoy.webproject.model.dao.UserDAO;
 
 public class MysqlDAOFactory extends AbstractDAOFactory {
 	private static ProxyConnection connection;
-	private final static Logger LOGGER = Logger.getLogger(FrontController.class);
+	private final static Logger LOGGER = Logger.getLogger(MysqlDAOFactory.class);
 
 	public ProxyConnection getProxyConnection() throws ConnectionException, SQLException {
 		connection = ConnectionPool.getInstance().getConnection();
@@ -49,6 +49,10 @@ public class MysqlDAOFactory extends AbstractDAOFactory {
 		return new PhotoDAOimpl(instance);
 	}
 
+	@Override
+	public MediaDAO getMediaDAO() {
+		return new MediaDAOimpl(instance);
+	}
 
 	public void close(Connection con) {
 		if (con != null) {

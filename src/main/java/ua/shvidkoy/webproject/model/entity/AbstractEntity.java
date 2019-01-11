@@ -1,6 +1,8 @@
 package ua.shvidkoy.webproject.model.entity;
 
-public abstract class AbstractEntity {
+import java.io.Serializable;
+
+public abstract class AbstractEntity implements Serializable{
 	
 	protected int id;
 	

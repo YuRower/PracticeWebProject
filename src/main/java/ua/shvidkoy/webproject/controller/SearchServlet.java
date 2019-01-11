@@ -1,8 +1,6 @@
 package ua.shvidkoy.webproject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,16 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import ua.shvidkoy.webproject.command.user.UpdateUserCommand;
 import ua.shvidkoy.webproject.constant.Path;
 import ua.shvidkoy.webproject.exception.ConnectionException;
 import ua.shvidkoy.webproject.exception.LogicException;
 import ua.shvidkoy.webproject.logic.GuestLogic;
 import ua.shvidkoy.webproject.model.entity.User;
 
-/**
- * Servlet implementation class SearchServlet
- */
+
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(SearchServlet.class);

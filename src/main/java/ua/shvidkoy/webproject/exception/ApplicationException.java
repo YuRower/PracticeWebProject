@@ -1,6 +1,8 @@
 package ua.shvidkoy.webproject.exception;
 
-public class ApplicationException extends Exception {
+import java.io.Serializable;
+
+public class ApplicationException extends Exception implements Serializable {
 	
 
 	public ApplicationException() {
